@@ -1,33 +1,34 @@
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 import './globals.css';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
+import { Header, Navbar, PromoBand, Footer, WhatsAppButton } from '../components/Layout';
 
 export const metadata: Metadata = {
-  title: 'MERLIN Cameroun | Construction, Logistique & Négoce à Kribi',
+  title: 'MERLIN Cameroun | Matériaux et Outillages à Kribi',
   description:
-    "MERLIN Cameroun accompagne vos projets de construction, logistique, transport et commerce général à Kribi et partout au Cameroun.",
+    'MERLIN Cameroun SARL: matériaux de construction, quincaillerie, équipements hydrauliques et électroménager à Kribi.',
   icons: {
-    icon: '/favicon.png',
-    shortcut: '/favicon.png',
-    apple: '/favicon.png',
+    icon: '/images/logo.jpg',
+    shortcut: '/images/logo.jpg',
+    apple: '/images/logo.jpg',
   },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="fr">
-      <body className="min-h-screen bg-paper text-industrial font-sans selection:bg-brand selection:text-white relative">
-        <Navbar />
-        <main>{children}</main>
-        <WhatsAppButton />
-        <Footer />
+      <body>
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <Navbar />
+          <PromoBand />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <WhatsAppButton />
+        </div>
       </body>
     </html>
   );

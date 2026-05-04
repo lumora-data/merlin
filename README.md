@@ -1,32 +1,33 @@
-# MERLIN Cameroun - Next.js
+# MERLIN Cameroun - Site Next.js
 
-Site vitrine migré vers **Next.js App Router** (`src/app`) avec Tailwind CSS v4.
+Site vitrine MERLIN Cameroun migré vers **Next.js App Router**.
 
-## Développement local
+## Démarrage local
 
-Prérequis: Node.js 20+ et npm.
+1. Installer les dépendances:
+   `npm install`
+2. Lancer en développement:
+   `npm run dev`
 
-```bash
-npm install
-npm run dev
-```
+## Scripts
 
-Le site démarre sur `http://localhost:3000`.
+- `npm run dev` - Démarrage Next.js sur le port 3000
+- `npm run build` - Build de production
+- `npm run start` - Serveur de production
+- `npm run lint` - Vérification TypeScript (`tsc --noEmit`)
 
-## Structure principale
+## Structure
 
-- `src/app`: routes Next.js (`/`, `/about`, `/contact`)
-- `src/components`: navbar, footer, bouton WhatsApp
-- `src/views`: sections/pages client
-- `public/images`: assets statiques (logo, hero, réalisations)
-- `public/favicon.png`: favicon basé sur le logo
+- `src/app` - Routes App Router
+- `src/pages` - Composants de pages réutilisés par les routes
+- `src/components` - UI partagée (header, footer, slider, etc.)
+- `src/constants.ts` - Données (catégories, produits, agences, réalisations)
+- `public/images` - Images locales utilisées par le site
 
 ## Déploiement Vercel
 
-- Framework preset: `Next.js`
+- Framework preset: **Next.js**
+- Root directory: racine du dépôt
 - Build command: `npm run build`
 - Install command: `npm install`
-- Output directory: laisser vide (par défaut Next.js)
-- Root directory: racine du dépôt
-
-En cas de cache obsolète sur Vercel, relancer un déploiement avec cache vidé.
+- Le site utilise uniquement `src/app` comme racine de routing
