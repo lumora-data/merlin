@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { PRODUCT_FAMILIES } from '../constants';
+import heroData from '../../content/hero.json';
 
 type Slide = {
   id: string;
@@ -12,16 +13,10 @@ type Slide = {
   alt: string;
 };
 
-const heroSlides: Slide[] = [
-  { id: 'hero-1', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-13-48-06.jpg'), alt: 'Hero Merlin 1' },
-  { id: 'hero-2', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-42-55.jpg'), alt: 'Hero Merlin 2' },
-  { id: 'hero-3', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-47-38.jpg'), alt: 'Hero Merlin 3' },
-  { id: 'hero-4', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-50-18.jpg'), alt: 'Hero Merlin 4' },
-  { id: 'hero-5', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-51-06.jpg'), alt: 'Hero Merlin 5' },
-  { id: 'hero-6', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-41-51 2.jpg'), alt: 'Hero Merlin 6' },
-  { id: 'hero-7', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-41-51.jpg'), alt: 'Hero Merlin 7' },
-  { id: 'hero-8', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-44-46.jpg'), alt: 'Hero Merlin 8' },
-];
+const heroSlides: Slide[] = (heroData as Slide[]).map((slide) => ({
+  ...slide,
+  image: encodeURI(slide.image),
+}));
 
 const productSlides: Slide[] = PRODUCT_FAMILIES.flatMap((family) =>
   family.images.map((image, index) => ({

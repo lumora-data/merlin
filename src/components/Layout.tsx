@@ -240,8 +240,13 @@ export const Footer = () => {
 	        </div>
 	      </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-white/10 text-center text-gray-500 text-xs">
-        &copy; {new Date().getFullYear()} MERLIN Cameroun. Tous droits réservés.
+      <div className="max-w-7xl mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-white/10 text-center text-gray-500 text-xs space-y-2">
+        <p>&copy; {new Date().getFullYear()} MERLIN Cameroun. Tous droits réservés.</p>
+        <p>
+          <Link href="/admin/login" className="opacity-70 hover:opacity-100 transition-opacity underline-offset-4 hover:underline">
+            Espace admin
+          </Link>
+        </p>
       </div>
     </footer>
   );

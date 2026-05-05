@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "title": "Construction",
+    "description": "Expertise dans la construction de bâtiments résidentiels, commerciaux et industriels.",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-13-48-06.jpg",
+    "category": "construction"
+  },
+  {
+    "id": "2",
+    "title": "Logistique & Transport",
+    "description": "Services de transport routier et solutions logistiques complètes partout au Cameroun.",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-47-38.jpg",
+    "category": "logistique"
+  },
+  {
+    "id": "3",
+    "title": "Commerce général",
+    "description": "Vente et distribution de matériaux de construction de haute qualité à Kribi.",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-50-18.jpg",
+    "category": "commerce"
+  },
+  {
+    "id": "4",
+    "title": "Négoce",
+    "description": "Intermédiation commerciale et trading de produits de haute qualité.",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-51-06.jpg",
+    "category": "negoce"
+  }
+]
