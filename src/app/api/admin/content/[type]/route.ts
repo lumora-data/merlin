@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
 import { requireAdminApi } from '../../../../../lib/admin/guards';
 import { getContent, saveContent } from '../../../../../lib/content/store';
-import { assertContentType, getContentRegistry } from '../../../../../lib/content/registry';
+import { getContentRegistry, isContentType } from '../../../../../lib/content/registry';
 import type { ContentType } from '../../../../../lib/content/types';
 
 export const runtime = 'nodejs';
@@ -15,7 +15,9 @@ type ContentAction =
 
 const getParamsType = async (params: Promise<{ type: string }>): Promise<ContentType> => {
   const { type } = await params;
-  assertContentType(type);
+  if (!isContentType(type)) {
+    throw new Error(`Unknown content type: ${type}`);
+  }
   return type;
 };
 
