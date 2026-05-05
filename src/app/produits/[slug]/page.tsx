@@ -5,7 +5,7 @@ import { PRODUCT_FAMILIES } from '../../../constants';
 import { SITE_NAME, SITE_URL } from '../../../lib/site';
 
 type Params = { slug: string };
-type PageProps = { params: Params | Promise<Params> };
+type PageProps = { params: Promise<Params> };
 
 const getProductBySlug = (slug: string) => PRODUCT_FAMILIES.find((family) => family.slug === slug);
 
@@ -14,7 +14,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
   const product = getProductBySlug(slug);
 
   if (!product) {
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
   const product = getProductBySlug(slug);
 
   if (!product) {
