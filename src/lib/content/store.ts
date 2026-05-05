@@ -22,10 +22,7 @@ const writeLocalJson = async (absoluteFilePath: string, data: unknown) => {
 };
 
 export const getContent = async <T extends ContentType>(type: T): Promise<ContentMap[T]> => {
-  const registry = getContentRegistry(type) as {
-    filePath: string;
-    validate: (value: unknown) => ContentMap[T];
-  };
+  const registry = getContentRegistry(type);
   const sourceData = canUseGitHubContent()
     ? (await readJsonFromGitHub<unknown>(registry.filePath)).data
     : await readLocalJson<unknown>(registry.filePath);
@@ -42,10 +39,7 @@ export const saveContent = async <T extends ContentType>({
   value: ContentMap[T];
   commitMessage: string;
 }) => {
-  const registry = getContentRegistry(type) as {
-    filePath: string;
-    validate: (value: unknown) => ContentMap[T];
-  };
+  const registry = getContentRegistry(type);
   const validated = registry.validate(value);
 
   if (canUseGitHubContent()) {

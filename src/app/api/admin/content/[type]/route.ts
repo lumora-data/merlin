@@ -2,7 +2,8 @@ import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
 import { requireAdminApi } from '../../../../../lib/admin/guards';
 import { getContent, saveContent } from '../../../../../lib/content/store';
-import { getContentRegistry } from '../../../../../lib/content/registry';
+import { assertContentType, getContentRegistry } from '../../../../../lib/content/registry';
+import type { ContentType } from '../../../../../lib/content/types';
 
 export const runtime = 'nodejs';
 
@@ -12,9 +13,9 @@ type ContentAction =
   | { action: 'update'; id: string; item: unknown }
   | { action: 'delete'; id: string };
 
-const getParamsType = async (params: Promise<{ type: string }>) => {
+const getParamsType = async (params: Promise<{ type: string }>): Promise<ContentType> => {
   const { type } = await params;
-  getContentRegistry(type);
+  assertContentType(type);
   return type;
 };
 
@@ -22,7 +23,7 @@ export async function GET(_request: Request, context: { params: Promise<{ type: 
   try {
     await requireAdminApi();
     const type = await getParamsType(context.params);
-    const items = await getContent(type as never);
+    const items = await getContent(type);
     return NextResponse.json({ ok: true, items });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Erreur lors de la lecture du contenu.';
@@ -35,7 +36,8 @@ export async function POST(request: Request, context: { params: Promise<{ type: 
   try {
     await requireAdminApi();
     const type = await getParamsType(context.params);
-    const current = await getContent(type as never);
+    const registry = getContentRegistry(type);
+    const current = (await getContent(type)) as Array<Record<string, unknown> & { id: string }>;
     const body = (await request.json()) as ContentAction;
 
     let nextItems: unknown[];
@@ -47,23 +49,25 @@ export async function POST(request: Request, context: { params: Promise<{ type: 
         throw new Error('Item invalide pour création.');
       }
 
-      const item = body.item as { id?: string };
+      const item = body.item as Record<string, unknown> & { id?: string };
       nextItems = [...(current as unknown[]), { ...item, id: item.id?.trim() || randomUUID() }];
     } else if (body.action === 'update') {
       if (!body.id) throw new Error('ID requis pour mise à jour.');
-      nextItems = (current as { id: string }[]).map((item) => (item.id === body.id ? ({ ...item, ...(body.item as object) } as { id: string }) : item));
+      nextItems = current.map((item) => (item.id === body.id ? { ...item, ...(body.item as Record<string, unknown>) } : item));
     } else {
       if (!body.id) throw new Error('ID requis pour suppression.');
-      nextItems = (current as { id: string }[]).filter((item) => item.id !== body.id);
+      nextItems = current.filter((item) => item.id !== body.id);
     }
 
+    const validatedItems = registry.validate(nextItems);
+
     await saveContent({
-      type: type as never,
-      value: nextItems as never,
+      type,
+      value: validatedItems,
       commitMessage: `cms(${type}): ${body.action ?? 'replace'}`,
     });
 
-    const updated = await getContent(type as never);
+    const updated = await getContent(type);
     return NextResponse.json({ ok: true, items: updated });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Erreur lors de la sauvegarde du contenu.';

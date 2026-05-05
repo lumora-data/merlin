@@ -33,10 +33,13 @@ export const CONTENT_REGISTRY: {
   },
 };
 
-export const getContentRegistry = (type: string) => {
-  if (!Object.prototype.hasOwnProperty.call(CONTENT_REGISTRY, type)) {
+export const isContentType = (type: string): type is ContentType =>
+  Object.prototype.hasOwnProperty.call(CONTENT_REGISTRY, type);
+
+export const assertContentType = (type: string): asserts type is ContentType => {
+  if (!isContentType(type)) {
     throw new Error(`Unknown content type: ${type}`);
   }
-
-  return CONTENT_REGISTRY[type as ContentType];
 };
+
+export const getContentRegistry = <T extends ContentType>(type: T) => CONTENT_REGISTRY[type];
