@@ -219,21 +219,21 @@ export const Home = () => {
             className="flex gap-12 md:gap-24 items-center whitespace-nowrap"
           >
              {[...Array(3)].flatMap(() => [
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-17-59-33.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-17-59-34.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-17-59-34 2.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-17-59-34 3.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-17-59-34 4.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-02-26.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-02-26 2.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-02-27.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-02-27 2.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-02-27 3.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-02-27 4.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-02-27 5.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-02-28.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-05-44.jpg'),
-               encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-07-02.jpg'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-17-59-33.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-17-59-34 2.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-17-59-34 3.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-17-59-34 4.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-17-59-34.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-02-26 2.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-02-26.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-02-27 2.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-02-27 3.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-02-27 4.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-02-27 5.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-02-27.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-02-28.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-05-44.png'),
+               encodeURI('/images/accueil/partenaires-detoures/PHOTO-2026-05-04-18-07-02.png'),
              ]).map((partner, i) => (
                 <img
                   key={i}
