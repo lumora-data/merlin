@@ -29,11 +29,11 @@ export const Header = () => {
 
         <div className="flex items-center gap-3">
           <a
-            href="tel:+237694425970"
+            href="tel:+237695425970"
             className="hidden lg:flex items-center gap-2 text-merlin-black font-semibold text-sm hover:text-merlin-red transition-colors"
           >
             <Phone className="w-4 h-4 text-merlin-red" />
-            +237 694 42 59 70
+            +237 695 42 59 70
           </a>
           <Link
             href="/contact"
@@ -188,7 +188,7 @@ export const Footer = () => {
             <li className="flex items-start gap-3">
               <span className="font-bold text-white">Téléphone:</span>
               <span>
-                +237 694 42 59 70
+                +237 695 42 59 70
                 <br />
                 +237 222 462 523
               </span>
@@ -211,7 +211,7 @@ export const Footer = () => {
 export const WhatsAppButton = () => {
   return (
     <a
-      href="https://wa.me/237694425970"
+      href="https://wa.me/237695425970"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-[#25D366] text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center"

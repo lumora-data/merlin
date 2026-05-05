@@ -354,7 +354,7 @@ export const Home = () => {
               <Link href="/contact" className="w-full sm:w-auto bg-white text-merlin-green px-8 py-4 rounded-full font-black text-base sm:text-lg hover:scale-105 transition-transform shadow-2xl uppercase tracking-widest">
                  Démarrer mon projet
               </Link>
-              <a href="tel:+237694425970" className="w-full sm:w-auto text-center bg-merlin-black/20 border-2 border-white/30 text-white px-8 py-4 rounded-full font-black text-base sm:text-lg hover:bg-white/10 transition-colors uppercase tracking-widest">
+              <a href="tel:+237695425970" className="w-full sm:w-auto text-center bg-merlin-black/20 border-2 border-white/30 text-white px-8 py-4 rounded-full font-black text-base sm:text-lg hover:bg-white/10 transition-colors uppercase tracking-widest">
                  Nous appeler
               </a>
            </div>

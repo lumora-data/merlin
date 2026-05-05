@@ -57,7 +57,7 @@ export const AgenciesPage = () => {
                     Appeler <Phone className="w-4 h-4" />
                   </a>
                   <a
-                    href="https://wa.me/237694425970"
+                    href="https://wa.me/237695425970"
                     className="flex-1 min-w-[140px] bg-[#25D366] text-white text-center py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition-all flex items-center justify-center gap-2"
                   >
                     WhatsApp 
@@ -87,7 +87,7 @@ export const AgenciesPage = () => {
                    </div>
                    <div className="space-y-2">
                        <span className="text-xs font-black uppercase tracking-widest text-merlin-red">WhatsApp</span>
-                       <p className="text-xl font-bold">+237 694 42 59 70</p>
+                       <p className="text-xl font-bold">+237 695 42 59 70</p>
                    </div>
                 </div>
               </div>

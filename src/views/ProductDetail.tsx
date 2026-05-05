@@ -140,7 +140,7 @@ export const ProductDetailPage = () => {
 
           <div className="pt-8">
             <a
-              href={`https://wa.me/237694425970?text=${encodeURIComponent(`Bonjour MERLIN Cameroun, je souhaiterais vérifier la disponibilité de la famille de produits : ${product.title}. Pouvez-vous me renseigner ?`)}`}
+              href={`https://wa.me/237695425970?text=${encodeURIComponent(`Bonjour MERLIN Cameroun, je souhaiterais vérifier la disponibilité de la famille de produits : ${product.title}. Pouvez-vous me renseigner ?`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-4 bg-[#25D366] text-white px-8 py-4 sm:px-10 sm:py-6 rounded-full font-black text-sm sm:text-lg hover:scale-105 transition-all shadow-xl shadow-green-500/20 uppercase tracking-widest"

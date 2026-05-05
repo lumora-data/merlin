@@ -37,13 +37,13 @@ export const ContactPage = () => {
 
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                  { icon: Phone, label: 'Téléphone', value: '+237 694 42 59 70', sub: '+237 222 462 523', color: 'bg-merlin-red' },
+                  { icon: Phone, label: 'Téléphone', value: '+237 695 42 59 70', sub: '+237 222 462 523', color: 'bg-merlin-red' },
                   { icon: Mail, label: 'Email', value: 'merlincameroun@gmail.com', sub: 'Réponse sous 24h', color: 'bg-merlin-green' },
                   { icon: MapPin, label: 'Localisation', value: 'Kribi, Cameroun', sub: 'Siège social', color: 'bg-merlin-black' },
                   { 
                     isWhatsApp: true,
                     label: 'WhatsApp', 
-                    value: '+237 694 42 59 70', 
+                    value: '+237 695 42 59 70', 
                     sub: 'Conseils rapides', 
                     color: 'bg-[#25D366]' 
                   }
