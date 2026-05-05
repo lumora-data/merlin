@@ -236,12 +236,12 @@ export const Home = () => {
                encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-07-02.jpg'),
              ]).map((partner, i) => (
                 <div key={i} className="flex flex-col items-center justify-center shrink-0">
-                   <div className="w-28 h-28 md:w-36 md:h-36 bg-white rounded-full flex items-center justify-center p-1 shadow-lg hover:shadow-2xl transition-all duration-500 border-4 border-merlin-gray hover:border-merlin-red/20 group relative overflow-hidden">
+                   <div className="w-32 h-20 md:w-44 md:h-28 bg-white rounded-2xl flex items-center justify-center p-2 shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-merlin-gray hover:border-merlin-red/20 group relative">
                       <div className="absolute inset-0 bg-merlin-green/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                       <img
                         src={partner}
                         alt="Partenaire Merlin"
-                        className="relative z-10 w-full h-full object-cover rounded-full"
+                        className="relative z-10 w-full h-full object-contain"
                       />
                    </div>
                 </div>

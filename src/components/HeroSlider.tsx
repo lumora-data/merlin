@@ -4,14 +4,31 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { PRODUCT_FAMILIES } from '../constants';
 
-const slides = [
-  { id: 1, image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-13-48-06.jpg') },
-  { id: 2, image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-42-55.jpg') },
-  { id: 3, image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-47-38.jpg') },
-  { id: 4, image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-50-18.jpg') },
-  { id: 5, image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-51-06.jpg') },
+type Slide = {
+  id: string;
+  image: string;
+  alt: string;
+};
+
+const heroSlides: Slide[] = [
+  { id: 'hero-1', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-13-48-06.jpg'), alt: 'Hero Merlin 1' },
+  { id: 'hero-2', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-42-55.jpg'), alt: 'Hero Merlin 2' },
+  { id: 'hero-3', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-47-38.jpg'), alt: 'Hero Merlin 3' },
+  { id: 'hero-4', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-50-18.jpg'), alt: 'Hero Merlin 4' },
+  { id: 'hero-5', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-51-06.jpg'), alt: 'Hero Merlin 5' },
 ];
+
+const productSlides: Slide[] = PRODUCT_FAMILIES.flatMap((family) =>
+  family.images.map((image, index) => ({
+    id: `product-${family.slug}-${index}`,
+    image,
+    alt: family.title,
+  })),
+);
+
+const slides: Slide[] = [...heroSlides, ...productSlides];
 
 export const HeroSlider = () => {
   const [current, setCurrent] = React.useState(0);
@@ -82,7 +99,7 @@ export const HeroSlider = () => {
                   <img
                     src={slides[index].image}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover/slide:scale-110"
-                    alt="Produits Merlin"
+                    alt={slides[index].alt}
                   />
                   <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-merlin-black/80 to-transparent opacity-0 group-hover/slide:opacity-100 transition-opacity">
                     <span className="text-merlin-green font-black text-[10px] tracking-widest uppercase">Voir nos produits</span>
