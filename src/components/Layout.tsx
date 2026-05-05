@@ -10,12 +10,16 @@ export const Header = () => {
   return (
     <header className="bg-white border-b border-gray-100 py-3 px-4 sm:px-6 md:px-12 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <Link href="/" className="shrink-0" aria-label="Accueil">
+        <Link href="/" className="shrink-0 flex items-center gap-2 sm:gap-3" aria-label="Accueil">
           <img
             src="/images/logo.jpg"
             alt="Logo Merlin Cameroun"
             className="h-12 w-auto sm:h-14 object-contain"
           />
+          <div className="flex items-baseline gap-1 leading-none">
+            <span className="text-base sm:text-lg font-black font-outfit tracking-tight text-merlin-red">MERLIN</span>
+            <span className="text-base sm:text-lg font-black font-outfit tracking-tight text-merlin-green">CAMEROUN</span>
+          </div>
         </Link>
 
         <div className="hidden md:flex flex-1 max-w-xl relative">
@@ -148,11 +152,17 @@ export const Footer = () => {
     <footer className="bg-merlin-black text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
         <div className="space-y-6">
-          <img
-            src="/images/logo.jpg"
-            alt="Logo Merlin Cameroun"
-            className="h-16 w-auto object-contain"
-          />
+          <div className="flex items-center gap-3">
+            <img
+              src="/images/logo.jpg"
+              alt="Logo Merlin Cameroun"
+              className="h-16 w-auto object-contain"
+            />
+            <div className="flex items-baseline gap-1 leading-none">
+              <span className="text-xl font-black font-outfit tracking-tight text-merlin-red">MERLIN</span>
+              <span className="text-xl font-black font-outfit tracking-tight text-merlin-green">CAMEROUN</span>
+            </div>
+          </div>
           <p className="text-gray-400 text-sm leading-relaxed">
             MERLIN Cameroun est votre partenaire de confiance à Kribi pour vos projets de construction, logistique et commerce général.
           </p>
