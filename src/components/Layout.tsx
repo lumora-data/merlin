@@ -7,6 +7,12 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { COMPANY_INFO } from '../lib/site';
 
+const FacebookIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
+  <svg className={`${className} fill-current`} viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+  </svg>
+);
+
 export const Header = () => {
   return (
     <header className="bg-white border-b border-gray-100 py-3 px-4 sm:px-6 md:px-12 sticky top-0 z-50 shadow-sm">
@@ -50,9 +56,11 @@ export const Header = () => {
 	            href={COMPANY_INFO.facebookUrl}
 	            target="_blank"
 	            rel="noopener noreferrer"
-	            className="bg-[#1877F2] text-white px-3 sm:px-5 py-2 rounded-full font-bold text-[11px] sm:text-sm hover:bg-[#1666cf] transition-colors shadow-lg whitespace-nowrap"
+	            className="bg-[#1877F2] text-white w-10 h-10 sm:w-11 sm:h-11 rounded-full hover:bg-[#1666cf] transition-colors shadow-lg flex items-center justify-center"
+              aria-label="Facebook officiel"
 	          >
-	            FACEBOOK
+	            <FacebookIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="sr-only">Facebook officiel</span>
 	          </a>
 	        </div>
 	      </div>
@@ -221,9 +229,11 @@ export const Footer = () => {
 	                href={COMPANY_INFO.facebookUrl}
 	                target="_blank"
 	                rel="noopener noreferrer"
-	                className="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider hover:bg-[#1666cf] transition-colors"
+	                className="inline-flex items-center justify-center bg-[#1877F2] text-white w-10 h-10 rounded-full hover:bg-[#1666cf] transition-colors"
+                  aria-label="Facebook officiel"
 	              >
-	                Suivre sur Facebook
+	                <FacebookIcon className="w-5 h-5" />
+                  <span className="sr-only">Facebook officiel</span>
 	              </a>
 	            </li>
 	          </ul>

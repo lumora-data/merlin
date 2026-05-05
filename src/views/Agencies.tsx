@@ -3,12 +3,9 @@
 import React from 'react';
 import { AGENCIES } from '../constants';
 import { motion } from 'motion/react';
-import { Phone, MapPin, MessageCircle, Clock, ExternalLink } from 'lucide-react';
+import { Phone, MapPin, Clock } from 'lucide-react';
 
 export const AgenciesPage = () => {
-  const getMapEmbedUrl = (query: string) =>
-    `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
-
   return (
     <div className="bg-merlin-gray min-h-screen pb-24">
       {/* Banner */}
@@ -76,18 +73,6 @@ export const AgenciesPage = () => {
                   </a>
                 </div>
 
-                <div className="pt-2">
-                  <div className="overflow-hidden rounded-2xl border border-gray-200 h-56">
-                    <iframe
-                      title={`Carte ${agency.name}`}
-                      src={getMapEmbedUrl(agency.mapQuery ?? `${agency.location}, Cameroun`)}
-                      className="w-full h-full"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      allowFullScreen
-                    />
-                  </div>
-                </div>
               </div>
             </motion.div>
           ))}
