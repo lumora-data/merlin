@@ -43,7 +43,7 @@ export const SEO_KEYWORDS = [
   'MERLIN Kribi',
   'matériaux de construction Kribi',
   'quincaillerie Cameroun',
-  'fer à béton Kribi',
+  'soudure ferronniers Kribi',
   'ciment Kribi',
   'peinture bâtiment Kribi',
   'soudure Cameroun',

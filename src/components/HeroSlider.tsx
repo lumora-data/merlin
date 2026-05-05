@@ -18,6 +18,9 @@ const heroSlides: Slide[] = [
   { id: 'hero-3', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-47-38.jpg'), alt: 'Hero Merlin 3' },
   { id: 'hero-4', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-50-18.jpg'), alt: 'Hero Merlin 4' },
   { id: 'hero-5', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-51-06.jpg'), alt: 'Hero Merlin 5' },
+  { id: 'hero-6', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-41-51 2.jpg'), alt: 'Hero Merlin 6' },
+  { id: 'hero-7', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-41-51.jpg'), alt: 'Hero Merlin 7' },
+  { id: 'hero-8', image: encodeURI('/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-44-46.jpg'), alt: 'Hero Merlin 8' },
 ];
 
 const productSlides: Slide[] = PRODUCT_FAMILIES.flatMap((family) =>
