@@ -18,7 +18,7 @@ export const Header = () => {
           />
           <div className="flex items-baseline gap-1 leading-none">
             <span className="text-base sm:text-lg font-black font-outfit tracking-tight text-merlin-red">MERLIN</span>
-            <span className="text-base sm:text-lg font-black font-outfit tracking-tight text-merlin-green">CAMEROUN</span>
+            <span className="text-base sm:text-lg font-black font-outfit tracking-tight text-merlin-red">CAMEROUN</span>
           </div>
         </Link>
 
@@ -160,7 +160,7 @@ export const Footer = () => {
             />
             <div className="flex items-baseline gap-1 leading-none">
               <span className="text-xl font-black font-outfit tracking-tight text-merlin-red">MERLIN</span>
-              <span className="text-xl font-black font-outfit tracking-tight text-merlin-green">CAMEROUN</span>
+              <span className="text-xl font-black font-outfit tracking-tight text-merlin-red">CAMEROUN</span>
             </div>
           </div>
           <p className="text-gray-400 text-sm leading-relaxed">
