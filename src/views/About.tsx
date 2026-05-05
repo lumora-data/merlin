@@ -81,6 +81,42 @@ export const AboutPage = () => {
         </div>
       </section>
 
+      {/* Conferences */}
+      <section className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto space-y-10">
+          <div className="text-center space-y-4">
+            <span className="text-merlin-red font-black text-xs uppercase tracking-widest px-4 py-1 bg-red-50 rounded-full border border-red-100">
+              Vie de l'entreprise
+            </span>
+            <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">
+              CONFÉRENCES À <span className="text-merlin-green">MERLIN</span>
+            </h2>
+            <p className="text-gray-500 max-w-3xl mx-auto">
+              Nous organisons et participons à des conférences pour partager nos expertises et renforcer notre proximité avec nos partenaires.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[encodeURI('/images/about/about-us-04.jpg'), encodeURI('/images/about/about-us-05.jpg')].map((image, i) => (
+              <motion.div
+                key={image}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-100"
+              >
+                <img
+                  src={image}
+                  alt={i === 0 ? 'Conférence Merlin Cameroun 1' : 'Conférence Merlin Cameroun 2'}
+                  className="w-full h-[320px] md:h-[380px] object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why Merlin? */}
       <section className="bg-merlin-black py-24 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
