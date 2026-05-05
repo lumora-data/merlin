@@ -199,7 +199,7 @@ export const Home = () => {
       </section>
 
       {/* Partners Section */}
-      <section className="py-24 relative overflow-hidden bg-white">
+      <section className="py-24 relative overflow-hidden bg-merlin-gray/60">
         <div className="absolute inset-0 bg-[radial-gradient(#f3f4f6_1px,transparent_1px)] [background-size:32px_32px] opacity-50 pointer-events-none" />
         
         <div className="w-full bg-merlin-gray text-merlin-black py-4 mb-20 shadow-lg border-b-4 border-gray-100 relative z-10">
@@ -235,16 +235,12 @@ export const Home = () => {
                encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-05-44.jpg'),
                encodeURI('/images/accueil/partenaires/PHOTO-2026-05-04-18-07-02.jpg'),
              ]).map((partner, i) => (
-                <div key={i} className="flex flex-col items-center justify-center shrink-0">
-                   <div className="w-32 h-20 md:w-44 md:h-28 bg-white rounded-2xl flex items-center justify-center p-2 shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-merlin-gray hover:border-merlin-red/20 group relative">
-                      <div className="absolute inset-0 bg-merlin-green/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      <img
-                        src={partner}
-                        alt="Partenaire Merlin"
-                        className="relative z-10 w-full h-full object-contain"
-                      />
-                   </div>
-                </div>
+                <img
+                  key={i}
+                  src={partner}
+                  alt="Partenaire Merlin"
+                  className="h-14 sm:h-16 md:h-20 w-auto object-contain shrink-0 mix-blend-multiply opacity-90 hover:opacity-100 transition-opacity duration-300"
+                />
              ))}
           </motion.div>
         </div>
