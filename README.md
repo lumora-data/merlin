@@ -19,7 +19,7 @@ Site vitrine MERLIN Cameroun migré vers **Next.js App Router**.
 ## Structure
 
 - `src/app` - Routes App Router
-- `src/pages` - Composants de pages réutilisés par les routes
+- `src/views` - Composants de pages réutilisés par les routes
 - `src/components` - UI partagée (header, footer, slider, etc.)
 - `src/constants.ts` - Données (catégories, produits, agences, réalisations)
 - `public/images` - Images locales utilisées par le site

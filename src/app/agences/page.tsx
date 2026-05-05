@@ -1,4 +1,4 @@
-import { AgenciesPage } from '../../pages/Agencies';
+import { AgenciesPage } from '../../views/Agencies';
 
 export default function Page() {
   return <AgenciesPage />;
