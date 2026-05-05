@@ -7,7 +7,7 @@ const asset = (path: string) => encodeURI(path);
 
 export const SERVICES: Service[] = (servicesData as Service[]).map((service) => ({
   ...service,
-  image: asset(service.image),
+  icon: service.icon,
 }));
 
 export const AGENCIES: Agency[] = agenciesData as Agency[];

@@ -1,5 +1,5 @@
 import type { ContentMap, HeroSlide } from './types';
-import type { Agency, ProductFamily, Service } from '../../types';
+import type { Agency, ProductFamily, Service, ServiceIcon } from '../../types';
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -37,6 +37,23 @@ export const validateHero = (input: unknown): HeroSlide[] => {
 };
 
 const SERVICE_CATEGORIES = ['construction', 'transport', 'commerce', 'logistique', 'negoce'] as const;
+const SERVICE_ICONS = ['settings', 'truck', 'shopping-bag', 'bar-chart-3', 'shield', 'check-circle', 'clock', 'map-pin'] as const;
+
+const DEFAULT_SERVICE_ICON_BY_CATEGORY: Record<Service['category'], ServiceIcon> = {
+  construction: 'settings',
+  transport: 'truck',
+  commerce: 'shopping-bag',
+  logistique: 'truck',
+  negoce: 'bar-chart-3',
+};
+
+const normalizeServiceIcon = (icon: unknown, category: Service['category']): ServiceIcon => {
+  if (isNonEmptyString(icon) && SERVICE_ICONS.includes(icon as (typeof SERVICE_ICONS)[number])) {
+    return icon as ServiceIcon;
+  }
+
+  return DEFAULT_SERVICE_ICON_BY_CATEGORY[category];
+};
 
 export const validateServices = (input: unknown): Service[] => {
   assert(Array.isArray(input), 'Services must be an array');
@@ -46,14 +63,18 @@ export const validateServices = (input: unknown): Service[] => {
     assert(isNonEmptyString(typed.id), `Service ${index + 1}: id is required`);
     assert(isNonEmptyString(typed.title), `Service ${index + 1}: title is required`);
     assert(isNonEmptyString(typed.description), `Service ${index + 1}: description is required`);
-    assert(isNonEmptyString(typed.image), `Service ${index + 1}: image is required`);
     assert(SERVICE_CATEGORIES.includes(typed.category as (typeof SERVICE_CATEGORIES)[number]), `Service ${index + 1}: invalid category`);
+    const serviceCategory = typed.category as Service['category'];
+
+    const legacyImageField = (item as { image?: unknown }).image;
+    const serviceIcon = normalizeServiceIcon((item as { icon?: unknown }).icon ?? legacyImageField, serviceCategory);
+
     return {
       id: typed.id.trim(),
       title: typed.title.trim(),
       description: typed.description.trim(),
-      image: typed.image.trim(),
-      category: typed.category,
+      icon: serviceIcon,
+      category: serviceCategory,
     };
   });
 

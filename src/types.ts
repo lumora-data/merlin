@@ -1,8 +1,18 @@
+export type ServiceIcon =
+  | 'settings'
+  | 'truck'
+  | 'shopping-bag'
+  | 'bar-chart-3'
+  | 'shield'
+  | 'check-circle'
+  | 'clock'
+  | 'map-pin';
+
 export interface Service {
   id: string;
   title: string;
   description: string;
-  image: string;
+  icon: ServiceIcon;
   category: 'construction' | 'transport' | 'commerce' | 'logistique' | 'negoce';
 }
 

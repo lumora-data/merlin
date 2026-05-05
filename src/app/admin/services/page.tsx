@@ -8,7 +8,7 @@ export default async function AdminServicesPage() {
   await requireAdminPage();
 
   return (
-    <AdminShell title="CRUD Services" subtitle="Créez, modifiez et supprimez les services.">
+    <AdminShell title="Gestion des services" subtitle="Ajoutez vos services, choisissez une icône et mettez à jour le contenu facilement.">
       <ServicesEditor />
     </AdminShell>
   );

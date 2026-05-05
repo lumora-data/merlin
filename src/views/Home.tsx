@@ -8,8 +8,17 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 
 const serviceIcons = {
+  settings: Settings,
+  truck: Truck,
+  'shopping-bag': ShoppingBag,
+  'bar-chart-3': BarChart3,
+  shield: Shield,
+  'check-circle': CheckCircle,
+  clock: Clock,
+  'map-pin': MapPin,
   'construction': Settings,
   'logistique': Truck,
+  'transport': Truck,
   'commerce': ShoppingBag,
   'negoce': BarChart3,
 };
@@ -120,7 +129,7 @@ export const Home = () => {
                 >
                   <div className="absolute top-0 right-0 w-32 h-32 bg-merlin-green/5 rounded-bl-[4rem] group-hover:scale-110 transition-transform" />
                   <div className="w-20 h-20 rounded-[2rem] bg-merlin-green/5 flex items-center justify-center text-merlin-green mb-10 group-hover:bg-merlin-green group-hover:text-white transition-all shadow-inner border border-merlin-green/10">
-                    {React.createElement(serviceIcons[service.category as keyof typeof serviceIcons] || Settings, { className: "w-10 h-10" })}
+                    {React.createElement(serviceIcons[service.icon as keyof typeof serviceIcons] || serviceIcons[service.category as keyof typeof serviceIcons] || Settings, { className: "w-10 h-10" })}
                   </div>
                   <h3 className="text-2xl font-black mb-4 text-merlin-black uppercase tracking-tight leading-tight">{service.title}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed mb-10 flex-1 italic font-medium">
