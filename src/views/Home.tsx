@@ -255,7 +255,7 @@ export const Home = () => {
 	               { label: 'Projets Livrés', value: '1.2k', sub: 'Satisfaction client' },
 	               { label: 'Matériaux référencés', value: '5k+', sub: 'Catalogue complet' },
 	               { label: 'Depuis', value: '2018', sub: 'Présence active à Kribi' },
-	               { label: 'Agences Kribi', value: '03', sub: 'Disponibilité maximale' }
+	               { label: 'Agences Kribi', value: '04', sub: 'Disponibilité maximale' }
 	             ].map((stat, i) => (
                 <motion.div 
                   key={i} 
