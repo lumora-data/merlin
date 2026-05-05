@@ -11,7 +11,7 @@
 - Quincaillerie générale
 - Sanitaires
 - Ciment
-- Soudure de différentes sections pour les ferronniers
+- Matériel de soudure
 - Outillage
 - Soudure
 - Pompes et équipements hydrauliques
@@ -24,7 +24,7 @@
 - Sanitaires
 - Peinture et accessoires
 - Ciment
-- Soudure de différentes sections pour les ferronniers
+- Matériel de soudure
 - Outillages
 - Fixation et quincaillerie générale
 - Portes et accessoires

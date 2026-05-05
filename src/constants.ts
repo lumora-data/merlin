@@ -148,15 +148,13 @@ export const PRODUCT_FAMILIES: ProductFamily[] = [
   },
   {
     id: '5',
-    slug: 'soudure',
-    title: 'Soudure',
+    slug: 'materiel-de-soudure',
+    title: 'Matériel de soudure',
     description:
       'Soudure de différentes sections pour les ferronniers.',
     images: [
-      asset('/images/produits/soudure/PHOTO-2026-05-04-16-51-48.jpg'),
-      asset('/images/produits/soudure/PHOTO-2026-05-04-16-53-04.jpg'),
-      asset('/images/produits/soudure/PHOTO-2026-05-04-16-53-20.jpg'),
-      asset('/images/produits/soudure/PHOTO-2026-05-04-16-53-53.jpg'),
+      asset('/images/produits/fer à béton/PHOTO-2026-05-04-16-39-00.jpg'),
+      asset('/images/produits/fer à béton/PHOTO-2026-05-04-16-43-48 2.jpg'),
     ],
   },
   {
@@ -198,6 +196,19 @@ export const PRODUCT_FAMILIES: ProductFamily[] = [
     description:
       'Équipements de cuisine et électroménagers modernes pour particuliers, commerces et espaces professionnels.',
     images: [asset('/images/produits/cuisine et électroménager/PHOTO-2026-05-04-16-59-52.jpg')],
+  },
+  {
+    id: '10',
+    slug: 'soudure',
+    title: 'Soudure',
+    description:
+      'Postes à souder, disques et consommables de soudage pour des travaux métalliques précis et durables.',
+    images: [
+      asset('/images/produits/soudure/PHOTO-2026-05-04-16-51-48.jpg'),
+      asset('/images/produits/soudure/PHOTO-2026-05-04-16-53-04.jpg'),
+      asset('/images/produits/soudure/PHOTO-2026-05-04-16-53-20.jpg'),
+      asset('/images/produits/soudure/PHOTO-2026-05-04-16-53-53.jpg'),
+    ],
   },
   {
     id: '11',

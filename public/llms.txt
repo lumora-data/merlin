@@ -9,7 +9,7 @@
 - Catalogue produits: /produits
 
 ## Résumé entreprise
-MERLIN Cameroun SARL fournit des matériaux de construction, de la quincaillerie, des sanitaires, du ciment, des outillages, de la soudure de différentes sections pour les ferronniers, des pompes et des équipements hydrauliques à Kribi.
+MERLIN Cameroun SARL fournit des matériaux de construction, de la quincaillerie, des sanitaires, du ciment, des outillages, du matériel de soudure, des produits de soudure, des pompes et des équipements hydrauliques à Kribi.
 
 ## Pages importantes
 - /produits: catalogue des familles de produits
