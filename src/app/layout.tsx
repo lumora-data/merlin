@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Header, Navbar, PromoBand, Footer, WhatsAppButton } from '../components/Layout';
+import { Header, Navbar, PromoBand, Footer, WhatsAppButton, FacebookButton } from '../components/Layout';
 import { COMPANY_INFO, SEO_KEYWORDS, SITE_DESCRIPTION, SITE_NAME, SITE_URL, SITE_URL_OBJECT } from '../lib/site';
 
 export const metadata: Metadata = {
@@ -112,6 +112,7 @@ export default function RootLayout({
           <PromoBand />
           <main className="flex-grow">{children}</main>
           <Footer />
+          <FacebookButton />
           <WhatsAppButton />
         </div>
       </body>

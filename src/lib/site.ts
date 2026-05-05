@@ -32,6 +32,7 @@ export const COMPANY_INFO = {
   phoneDisplay: '+237 695 42 59 70',
   phoneE164: '+237695425970',
   whatsappUrl: 'https://wa.me/237695425970',
+  facebookUrl: 'https://www.facebook.com/share/1AeZQkz1tk/?mibextid=wwXIfr',
   logoPath: '/images/logo.jpg',
 };
 

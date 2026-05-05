@@ -39,24 +39,31 @@ export const AGENCIES: Agency[] = [
     name: 'MERLIN DOMBE',
     phone: '222 462 523',
     location: 'Kribi, Dombe',
+    address: 'Près de la station Bocom',
+    mapQuery: 'MERLIN DOMBE près de la station Bocom, Kribi, Cameroun',
   },
   {
     id: '2',
     name: 'MERLIN BOSSIGUI',
     phone: '2 22 46 25 63',
     location: 'Kribi, Bossigui',
+    address: 'Près de la sous-préfecture',
+    mapQuery: 'MERLIN BOSSIGUI près de la sous-préfecture, Kribi, Cameroun',
   },
   {
     id: '3',
     name: 'MERLIN MPANGOU',
     phone: '695 425 970',
     location: 'Kribi, Mpangou',
+    address: 'Après Hysacam',
+    mapQuery: 'MERLIN MPANGOU après Hysacam, Kribi, Cameroun',
   },
   {
     id: '4',
     name: 'MERLIN BILOLO',
     phone: '651 229 410',
     location: 'Kribi, Bilolo',
+    mapQuery: 'MERLIN BILOLO, Kribi, Cameroun',
   },
 ];
 

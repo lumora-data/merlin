@@ -12,6 +12,7 @@ export interface Agency {
   phone: string;
   location: string;
   address?: string;
+  mapQuery?: string;
 }
 
 export interface Realization {

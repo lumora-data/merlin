@@ -68,12 +68,12 @@ export const ContactPage = () => {
              <div className="bg-merlin-black p-10 rounded-[3rem] text-white space-y-4">
                 <h3 className="text-xl font-bold uppercase text-merlin-yellow">Horaires de bureau</h3>
                 <div className="flex justify-between items-center text-sm border-b border-white/10 py-3">
-                   <span className="text-gray-400">Lundi — Vendredi</span>
-                   <span className="font-bold">08:00 — 18:00</span>
+                   <span className="text-gray-400">Lundi — Samedi</span>
+                   <span className="font-bold">07:30 — 18:00</span>
                 </div>
                 <div className="flex justify-between items-center text-sm py-3">
-                   <span className="text-gray-400">Samedi</span>
-                   <span className="font-bold">08:30 — 13:00</span>
+                   <span className="text-gray-400">Jours fériés</span>
+                   <span className="font-bold">Ouvert</span>
                 </div>
              </div>
           </div>

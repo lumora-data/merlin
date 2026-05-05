@@ -251,12 +251,12 @@ export const Home = () => {
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-16 text-center">
-             {[
-               { label: 'Projets Livrés', value: '1.2k', sub: 'Satisfaction client' },
-               { label: 'Matériaux référencés', value: '5k+', sub: 'Catalogue complet' },
-               { label: 'Années d\'expertise', value: '15', sub: 'Savoir-faire local' },
-               { label: 'Agences Kribi', value: '03', sub: 'Disponibilité maximale' }
-             ].map((stat, i) => (
+	             {[
+	               { label: 'Projets Livrés', value: '1.2k', sub: 'Satisfaction client' },
+	               { label: 'Matériaux référencés', value: '5k+', sub: 'Catalogue complet' },
+	               { label: 'Depuis', value: '2018', sub: 'Présence active à Kribi' },
+	               { label: 'Agences Kribi', value: '03', sub: 'Disponibilité maximale' }
+	             ].map((stat, i) => (
                 <motion.div 
                   key={i} 
                   initial={{ opacity: 0, y: 30, scale: 0.9 }}
@@ -287,63 +287,116 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-24 px-6 md:px-12 overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="relative">
+	      {/* Services & Strengths */}
+	      <section className="py-24 px-6 md:px-12 overflow-hidden">
+	        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+	          <div className="relative">
             <div className="absolute -top-12 -left-12 w-48 h-48 bg-merlin-green/10 rounded-full blur-3xl" />
             <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-merlin-red/10 rounded-full blur-3xl" />
-            <div className="relative rounded-[3rem] overflow-hidden shadow-2xl h-[500px]">
-              <img
-                src={encodeURI('/images/accueil/know-us.jpg')}
-                alt="Expertise"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur p-8 rounded-3xl shadow-2xl">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-merlin-green flex items-center justify-center text-white">
-                    <CheckCircle className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-black text-xl">100% Qualité</h4>
-                    <p className="text-xs text-gray-500">Engagement total sur chaque projet</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+	            <div className="relative rounded-[3rem] overflow-hidden shadow-2xl h-[500px]">
+	              <img
+	                src={encodeURI('/images/accueil/know-us.jpg')}
+	                alt="Expertise"
+	                className="w-full h-full object-cover"
+	              />
+	              <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur p-8 rounded-3xl shadow-2xl">
+	                <div className="flex items-center gap-4 mb-4">
+	                  <div className="w-12 h-12 rounded-2xl bg-merlin-green flex items-center justify-center text-white">
+	                    <CheckCircle className="w-6 h-6" />
+	                  </div>
+	                  <div>
+	                    <h4 className="font-black text-xl">Depuis 2018</h4>
+	                    <p className="text-xs text-gray-500">Des années d'expérience au service de vos projets</p>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
 
-          <div className="space-y-8">
-             <div className="space-y-4 text-center lg:text-left">
-                <span className="text-merlin-red font-black text-xs uppercase tracking-widest">Notre Différence</span>
-                <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">POURQUOI CHOISIR <span className="text-merlin-green">MERLIN ?</span></h2>
-             </div>
+	          <div className="space-y-8">
+	             <div className="space-y-4 text-center lg:text-left">
+	                <span className="text-merlin-red font-black text-xs uppercase tracking-widest">Nos Services Et Atouts</span>
+	                <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">VOS PROJETS ENTRE DE <span className="text-merlin-green">BONNES MAINS</span></h2>
+	             </div>
 
-             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {[
-                  { title: 'Rapidité', desc: 'Nous comprenons l\'urgence de vos besoins et agissons vite.' },
-                  { title: 'Efficacité', desc: 'Chaque service est optimisé pour un résultat parfait.' },
-                  { title: 'Fiabilité', desc: 'Une transparence totale et un respect des engagements.' },
-                  { title: 'Présence locale', desc: 'Ancré à Kribi, nous connaissons le terrain sur le bout des doigts.' }
-                ].map((item, i) => (
-                  <div key={i} className="p-6 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                    <h4 className="text-lg font-black text-merlin-black mb-2">{item.title}</h4>
-                    <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
-             </div>
+	             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+	                {[
+	                  { title: 'Années d\'expérience', desc: 'Nous existons depuis 2018 et accompagnons des projets de toutes tailles.' },
+	                  { title: 'Rapidité et efficacité', desc: 'Notre organisation permet une prise en charge rapide et un service efficace.' },
+	                  { title: 'Prix accessibles', desc: 'Des tarifs adaptés à tous types de clients, particuliers comme professionnels.' },
+	                  { title: 'Service client réactif', desc: 'Une équipe disponible pour répondre vite à vos questions et urgences.' },
+	                  { title: 'Personnel jeune et professionnel', desc: 'Une équipe dynamique, engagée et orientée résultats sur le terrain.' },
+	                  { title: 'Compte client et ravitaillement progressif', desc: 'Possibilité d\'ouvrir un compte client et d\'acheter progressivement selon l\'avancement du chantier.' },
+	                  { title: 'Suivi des commandes', desc: 'Nous suivons chaque commande jusqu\'à sa destination finale.' },
+	                  { title: 'Livraison rapide et flotte de camions', desc: 'Flotte disponible pour des livraisons à moindre coût à Kribi et ses environs.' }
+	                ].map((item, i) => (
+	                  <div key={i} className="p-6 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+	                    <h4 className="text-lg font-black text-merlin-black mb-2">{item.title}</h4>
+	                    <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+	                  </div>
+	                ))}
+	             </div>
 
              <div className="pt-8">
                 <Link
                   href="/a-propos"
                   className="inline-block bg-merlin-black text-white px-8 py-4 rounded-full font-bold text-sm tracking-widest hover:bg-merlin-red transition-all shadow-xl shadow-black/20"
-                >
-                  DÉCOUVRIR NOTRE HISTOIRE
-                </Link>
-             </div>
-          </div>
-        </div>
-      </section>
+	                >
+	                  EN SAVOIR PLUS SUR MERLIN
+	                </Link>
+	             </div>
+	          </div>
+	        </div>
+	      </section>
+
+	      {/* Testimonials */}
+	      <section className="py-24 px-6 md:px-12 bg-white">
+	        <div className="max-w-7xl mx-auto space-y-12">
+	          <div className="text-center space-y-4">
+	            <span className="text-merlin-red font-black text-xs uppercase tracking-widest">Avis Clients</span>
+	            <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">TÉMOIGNAGES</h2>
+	            <p className="text-gray-500 max-w-3xl mx-auto">
+	              La satisfaction de nos clients est au cœur de notre engagement quotidien.
+	            </p>
+	          </div>
+
+	          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+	            {[
+	              {
+	                name: 'Client BTP à Kribi',
+	                role: 'Approvisionnement chantier',
+	                quote: 'MERLIN nous fournit rapidement les matériaux, et le suivi des commandes est très sérieux jusqu\'à la livraison finale.',
+	              },
+	              {
+	                name: 'Cliente Particulière',
+	                role: 'Projet de construction maison',
+	                quote: 'Les prix sont accessibles, l\'équipe est professionnelle et nous avons apprécié la possibilité d\'achat progressif selon l\'avancement du projet.',
+	              },
+	              {
+	                name: 'Entrepreneur Local',
+	                role: 'Travaux et logistique',
+	                quote: 'Service client réactif, livraisons rapides et flotte de camions disponible. Une vraie solution de proximité à Kribi.',
+	              },
+	            ].map((review, i) => (
+	              <motion.div
+	                key={i}
+	                initial={{ opacity: 0, y: 20 }}
+	                whileInView={{ opacity: 1, y: 0 }}
+	                transition={{ delay: i * 0.1 }}
+	                viewport={{ once: true }}
+	                className="bg-merlin-gray/50 border border-gray-100 rounded-[2.5rem] p-8 shadow-sm hover:shadow-lg transition-all"
+	              >
+	                <p className="text-merlin-yellow text-lg tracking-[0.2em] mb-4">★★★★★</p>
+	                <p className="text-gray-700 leading-relaxed mb-6">{review.quote}</p>
+	                <div className="pt-4 border-t border-gray-200">
+	                  <p className="font-black text-merlin-black uppercase text-sm">{review.name}</p>
+	                  <p className="text-gray-500 text-xs uppercase tracking-widest mt-1">{review.role}</p>
+	                </div>
+	              </motion.div>
+	            ))}
+	          </div>
+	        </div>
+	      </section>
 
       {/* CTA Section */}
       <section className="bg-merlin-green py-20 px-6">
