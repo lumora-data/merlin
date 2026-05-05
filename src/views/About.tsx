@@ -96,8 +96,14 @@ export const AboutPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[encodeURI('/images/about/about-us-04.jpg'), encodeURI('/images/about/about-us-05.jpg')].map((image, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              encodeURI('/images/about/about-us-04.jpg'),
+              encodeURI('/images/about/about-us-05.jpg'),
+              encodeURI('/images/about/about-us-06.jpg'),
+              encodeURI('/images/about/about-us-07.jpg'),
+              encodeURI('/images/about/about-us-08.jpg'),
+            ].map((image, i) => (
               <motion.div
                 key={image}
                 initial={{ opacity: 0, y: 20 }}
@@ -108,7 +114,7 @@ export const AboutPage = () => {
               >
                 <img
                   src={image}
-                  alt={i === 0 ? 'Conférence Merlin Cameroun 1' : 'Conférence Merlin Cameroun 2'}
+                  alt={`Conférence Merlin Cameroun ${i + 1}`}
                   className="w-full h-[320px] md:h-[380px] object-cover"
                 />
               </motion.div>
