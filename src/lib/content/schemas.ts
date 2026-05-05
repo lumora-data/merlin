@@ -1,9 +1,9 @@
 import type { ContentMap, HeroSlide } from './types';
 import type { Agency, ProductFamily, Service } from '../../types';
 
-const assert = (condition: boolean, message: string): asserts condition => {
+function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
-};
+}
 
 const isNonEmptyString = (value: unknown) => typeof value === 'string' && value.trim().length > 0;
 
