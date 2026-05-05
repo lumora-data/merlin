@@ -43,7 +43,7 @@ export const AGENCIES: Agency[] = [
   {
     id: '2',
     name: 'MERLIN BOSSIGUI',
-    phone: '222 472 563',
+    phone: '2 22 46 25 63',
     location: 'Kribi, Bossigui',
   },
   {
