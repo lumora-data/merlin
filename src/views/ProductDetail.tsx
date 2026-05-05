@@ -102,7 +102,7 @@ export const ProductDetailPage = () => {
               {product.description}
             </p>
             <p className="mt-6">
-              Chez <strong>ETS MERLIN</strong>, nous sélectionnons rigoureusement nos {product.title.toLowerCase()} pour répondre aux exigences climatiques et techniques du Cameroun, particulièrement à Kribi. Que vous soyez un professionnel du bâtiment ou un particulier, nous vous garantissons des produits certifiés et durables.
+              Chez <strong>STE MERLIN</strong>, nous sélectionnons rigoureusement nos {product.title.toLowerCase()} pour répondre aux exigences climatiques et techniques du Cameroun, particulièrement à Kribi. Que vous soyez un professionnel du bâtiment ou un particulier, nous vous garantissons des produits certifiés et durables.
             </p>
           </div>
 
