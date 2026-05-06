@@ -3,8 +3,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Target, Eye, Heart, Award, Users, Globe } from 'lucide-react';
+import type { Locale } from '../lib/i18n';
 
-export const AboutPage = () => {
+export const AboutPage = ({ locale = 'fr' }: { locale?: Locale }) => {
+  const isEn = locale === 'en';
+
   return (
     <div className="bg-merlin-gray min-h-screen">
       {/* Hero Section */}
@@ -15,10 +18,12 @@ export const AboutPage = () => {
             animate={{ opacity: 1, x: 0 }}
             className="space-y-8"
           >
-            <span className="text-merlin-red font-black text-xs uppercase tracking-widest px-4 py-1 bg-red-50 rounded-full border border-red-100">Qui sommes-nous ?</span>
-            <h1 className="text-4xl sm:text-5xl md:text-8xl font-black font-outfit uppercase leading-[0.9]">DÉCOUVREZ <br /><span className="text-merlin-green">MERLIN</span> CAMEROUN</h1>
+            <span className="text-merlin-red font-black text-xs uppercase tracking-widest px-4 py-1 bg-red-50 rounded-full border border-red-100">{isEn ? 'Who are we?' : 'Qui sommes-nous ?'}</span>
+            <h1 className="text-4xl sm:text-5xl md:text-8xl font-black font-outfit uppercase leading-[0.9]">{isEn ? 'DISCOVER' : 'DÉCOUVREZ'} <br /><span className="text-merlin-green">MERLIN</span> CAMEROUN</h1>
             <p className="text-base sm:text-lg md:text-xl text-gray-500 leading-relaxed max-w-xl">
-              MERLIN Cameroun est une entreprise basée à Kribi spécialisée dans la construction, la logistique, le transport, le commerce général et le négoce. Elle accompagne les particuliers, entreprises et organisations avec des services rapides, fiables et efficaces.
+              {isEn
+                ? 'MERLIN Cameroun is a Kribi-based company specialized in construction, logistics, transport, general trading and commerce. We support individuals, companies and organizations with fast, reliable and efficient services.'
+                : 'MERLIN Cameroun est une entreprise basée à Kribi spécialisée dans la construction, la logistique, le transport, le commerce général et le négoce. Elle accompagne les particuliers, entreprises et organisations avec des services rapides, fiables et efficaces.'}
             </p>
           </motion.div>
 
@@ -46,20 +51,20 @@ export const AboutPage = () => {
            {[
              {
                icon: Target,
-               title: 'Notre Mission',
-               text: 'Fournir des services de construction et de logistique de haute qualité, en mettant l\'accent sur la rapidité d\'exécution et l\'efficacité opérationnelle.',
+               title: isEn ? 'Our Mission' : 'Notre Mission',
+               text: isEn ? 'Deliver high-quality construction and logistics services focused on speed and operational efficiency.' : 'Fournir des services de construction et de logistique de haute qualité, en mettant l\'accent sur la rapidité d\'exécution et l\'efficacité opérationnelle.',
                color: 'bg-merlin-red'
              },
              {
                icon: Eye,
-               title: 'Notre Vision',
-               text: 'Devenir la référence incontournable au Cameroun pour le commerce général et le transport, reconnue pour son professionnalisme et son ancrage local à Kribi.',
+               title: isEn ? 'Our Vision' : 'Notre Vision',
+               text: isEn ? 'Become a leading reference in Cameroon for general trading and transport, recognized for professionalism and strong local roots in Kribi.' : 'Devenir la référence incontournable au Cameroun pour le commerce général et le transport, reconnue pour son professionnalisme et son ancrage local à Kribi.',
                color: 'bg-merlin-green'
              },
              {
                icon: Heart,
-               title: 'Nos Valeurs',
-               text: 'Confiance, Rapidité, Efficacité et Professionnalisme guident chacune de nos actions et interactions avec nos partenaires.',
+               title: isEn ? 'Our Values' : 'Nos Valeurs',
+               text: isEn ? 'Trust, speed, efficiency and professionalism guide each action and interaction with our partners.' : 'Confiance, Rapidité, Efficacité et Professionnalisme guident chacune de nos actions et interactions avec nos partenaires.',
                color: 'bg-merlin-black'
              }
            ].map((item, i) => (
@@ -86,13 +91,15 @@ export const AboutPage = () => {
         <div className="max-w-7xl mx-auto space-y-10">
           <div className="text-center space-y-4">
             <span className="text-merlin-red font-black text-xs uppercase tracking-widest px-4 py-1 bg-red-50 rounded-full border border-red-100">
-              Vie de l'entreprise
+              {isEn ? 'Company life' : 'Vie de l\'entreprise'}
             </span>
             <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">
-              CONFÉRENCES À <span className="text-merlin-green">MERLIN</span>
+              {isEn ? 'CONFERENCES AT' : 'CONFÉRENCES À'} <span className="text-merlin-green">MERLIN</span>
             </h2>
             <p className="text-gray-500 max-w-3xl mx-auto">
-              Nous organisons et participons à des conférences pour partager nos expertises et renforcer notre proximité avec nos partenaires.
+              {isEn
+                ? 'We organize and attend conferences to share expertise and strengthen proximity with our partners.'
+                : 'Nous organisons et participons à des conférences pour partager nos expertises et renforcer notre proximité avec nos partenaires.'}
             </p>
           </div>
 
@@ -127,12 +134,12 @@ export const AboutPage = () => {
       <section className="bg-merlin-black py-24 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
            <div className="space-y-8">
-              <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">POURQUOI NOUS <span className="text-merlin-red">FAIRE CONFIANCE ?</span></h2>
+              <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">{isEn ? 'WHY TRUST' : 'POURQUOI NOUS'} <span className="text-merlin-red">{isEn ? 'US?' : 'FAIRE CONFIANCE ?'}</span></h2>
               <div className="space-y-6">
                  {[
-                   { icon: Award, title: 'Expertise Reconnue', text: 'Des années d\'expérience dans les secteurs clés du développement au Cameroun.' },
-                   { icon: Users, title: 'Équipe Qualifiée', text: 'Des experts passionnés et dévoués à la réussite de vos projets.' },
-                   { icon: Globe, title: 'Impact National', text: 'Une présence forte à Kribi avec une capacité d\'intervention partout au pays.' }
+                   { icon: Award, title: isEn ? 'Proven expertise' : 'Expertise Reconnue', text: isEn ? 'Years of experience in key development sectors in Cameroon.' : 'Des années d\'expérience dans les secteurs clés du développement au Cameroun.' },
+                   { icon: Users, title: isEn ? 'Qualified team' : 'Équipe Qualifiée', text: isEn ? 'Passionate experts dedicated to your project success.' : 'Des experts passionnés et dévoués à la réussite de vos projets.' },
+                   { icon: Globe, title: isEn ? 'National impact' : 'Impact National', text: isEn ? 'Strong presence in Kribi with intervention capacity across the country.' : 'Une présence forte à Kribi avec une capacité d\'intervention partout au pays.' }
                  ].map((feat, i) => (
                    <div key={i} className="flex gap-6 group">
                       <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-merlin-yellow shrink-0 group-hover:bg-merlin-yellow group-hover:text-merlin-black transition-all">
@@ -154,12 +161,12 @@ export const AboutPage = () => {
                         <img src={encodeURI('/images/about/about-us-02.jpg')} className="w-full h-full object-cover" alt="Équipe Merlin" />
                      </div>
                      <div className="h-48 rounded-3xl overflow-hidden shadow-2xl bg-merlin-red flex items-center justify-center p-8 text-center">
-                        <p className="text-2xl font-black uppercase">Rapidité Absolue</p>
+                        <p className="text-2xl font-black uppercase">{isEn ? 'Absolute speed' : 'Rapidité Absolue'}</p>
                      </div>
                  </div>
                  <div className="space-y-4">
                      <div className="h-48 rounded-3xl overflow-hidden shadow-2xl bg-merlin-green flex items-center justify-center p-8 text-center">
-                        <p className="text-2xl font-black uppercase">100% Efficace</p>
+                        <p className="text-2xl font-black uppercase">{isEn ? '100% Efficient' : '100% Efficace'}</p>
                      </div>
                      <div className="h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-merlin-yellow">
                         <img src={encodeURI('/images/about/about-us-03.jpg')} className="w-full h-full object-cover" alt="Réalisation Merlin" />

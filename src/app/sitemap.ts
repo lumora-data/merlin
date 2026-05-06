@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { PRODUCT_FAMILIES } from '../constants';
 import { SITE_URL, STATIC_ROUTES } from '../lib/site';
+import { ROUTES } from '../lib/i18n';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -19,5 +20,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticEntries, ...productEntries];
+  const englishStaticRoutes = Object.values(ROUTES.en);
+  const englishStaticEntries: MetadataRoute.Sitemap = englishStaticRoutes.map((route) => ({
+    url: `${SITE_URL}${route}`,
+    lastModified: now,
+    changeFrequency: route === '/en' ? 'daily' : 'weekly',
+    priority: route === '/en' ? 0.95 : 0.75,
+  }));
+
+  const englishProductEntries: MetadataRoute.Sitemap = PRODUCT_FAMILIES.map((family) => ({
+    url: `${SITE_URL}/en/products/${family.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.65,
+  }));
+
+  return [...staticEntries, ...productEntries, ...englishStaticEntries, ...englishProductEntries];
 }

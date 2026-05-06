@@ -4,17 +4,22 @@ import React from 'react';
 import { AGENCIES } from '../constants';
 import { motion } from 'motion/react';
 import { Phone, MapPin, Clock } from 'lucide-react';
+import type { Locale } from '../lib/i18n';
 
-export const AgenciesPage = () => {
+export const AgenciesPage = ({ locale = 'fr' }: { locale?: Locale }) => {
+  const isEn = locale === 'en';
+
   return (
     <div className="bg-merlin-gray min-h-screen pb-24">
       {/* Banner */}
       <div className="bg-white py-16 md:py-24 px-6 text-center border-b border-gray-100">
         <div className="max-w-7xl mx-auto space-y-6">
-          <span className="text-merlin-red font-black text-xs uppercase tracking-widest px-4 py-1 bg-red-50 rounded-full border border-red-100">Proximité Locale</span>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-outfit uppercase">NOS <span className="text-merlin-green">AGENCES</span></h1>
+          <span className="text-merlin-red font-black text-xs uppercase tracking-widest px-4 py-1 bg-red-50 rounded-full border border-red-100">{isEn ? 'Local presence' : 'Proximité Locale'}</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-outfit uppercase">{isEn ? 'OUR' : 'NOS'} <span className="text-merlin-green">{isEn ? 'AGENCIES' : 'AGENCES'}</span></h1>
           <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
-            Retrouvez-nous dans nos différents points de service à Kribi. Nos équipes sont prêtes à vous accueillir pour tous vos besoins en commerce, logistique et services.
+            {isEn
+              ? 'Find us in our service points across Kribi. Our teams are ready to support your trading, logistics and construction needs.'
+              : 'Retrouvez-nous dans nos différents points de service à Kribi. Nos équipes sont prêtes à vous accueillir pour tous vos besoins en commerce, logistique et services.'}
           </p>
         </div>
       </div>
@@ -41,7 +46,7 @@ export const AgenciesPage = () => {
                 <div className="space-y-4 pt-4 border-t border-gray-100 text-gray-500">
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-gray-300" />
-                    <span className="text-sm font-medium">Ouvert : Lundi à samedi, 07:30 — 18:00 (jours fériés inclus)</span>
+                    <span className="text-sm font-medium">{isEn ? 'Open: Monday to Saturday, 07:30 — 18:00 (holidays included)' : 'Ouvert : Lundi à samedi, 07:30 — 18:00 (jours fériés inclus)'}</span>
                   </div>
                   {agency.address && (
                     <div className="flex items-center gap-3">
@@ -60,7 +65,7 @@ export const AgenciesPage = () => {
                     href={`tel:${agency.phone.replace(/\s/g, '')}`}
                     className="flex-1 min-w-[140px] bg-merlin-black text-white text-center py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-merlin-red transition-all flex items-center justify-center gap-2"
                   >
-                    Appeler <Phone className="w-4 h-4" />
+                    {isEn ? 'Call' : 'Appeler'} <Phone className="w-4 h-4" />
                   </a>
                   <a
                     href="https://wa.me/237695425970"
@@ -83,13 +88,15 @@ export const AgenciesPage = () => {
            <div className="absolute top-0 right-0 w-64 h-64 bg-merlin-green/20 blur-[100px]" />
            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
-                <h2 className="text-3xl md:text-5xl font-black font-outfit uppercase">SERVICE CLIENT <span className="text-merlin-red">CENTRALISÉ</span></h2>
+                <h2 className="text-3xl md:text-5xl font-black font-outfit uppercase">{isEn ? 'CENTRALIZED' : 'SERVICE CLIENT'} <span className="text-merlin-red">{isEn ? 'SUPPORT' : 'CENTRALISÉ'}</span></h2>
                 <p className="text-gray-400 text-lg leading-relaxed">
-                  Pour toute demande urgente ou pour un devis concernant nos services de logistique et de construction, contactez notre siège directement.
+                  {isEn
+                    ? 'For any urgent request or quote about logistics and construction services, contact our head office directly.'
+                    : 'Pour toute demande urgente ou pour un devis concernant nos services de logistique et de construction, contactez notre siège directement.'}
                 </p>
                 <div className="pt-4 flex flex-col md:flex-row gap-8">
                    <div className="space-y-2">
-                      <span className="text-xs font-black uppercase tracking-widest text-merlin-green">Email</span>
+                      <span className="text-xs font-black uppercase tracking-widest text-merlin-green">{isEn ? 'Email' : 'Email'}</span>
                       <p className="text-xl font-bold">merlincameroun@gmail.com</p>
                    </div>
                    <div className="space-y-2">
@@ -100,7 +107,7 @@ export const AgenciesPage = () => {
               </div>
               <div className="flex justify-center md:justify-end">
                  <div className="w-48 h-48 rounded-full border-8 border-merlin-green flex items-center justify-center bg-white/5 backdrop-blur">
-                    <span className="text-4xl font-black text-merlin-green">24h/24</span>
+                    <span className="text-4xl font-black text-merlin-green">{isEn ? '24/7' : '24h/24'}</span>
                  </div>
               </div>
            </div>

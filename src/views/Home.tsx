@@ -6,6 +6,8 @@ import { SERVICES, AGENCIES, PRODUCT_FAMILIES } from '../constants';
 import { Settings, Truck, ShoppingBag, BarChart3, Clock, CheckCircle, Shield, MapPin, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
+import type { Locale } from '../lib/i18n';
+import { ROUTES } from '../lib/i18n';
 
 const serviceIcons = {
   settings: Settings,
@@ -23,7 +25,10 @@ const serviceIcons = {
   'negoce': BarChart3,
 };
 
-export const Home = () => {
+export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
+  const isEn = locale === 'en';
+  const routes = ROUTES[locale];
+
   return (
     <div className="bg-merlin-gray">
       {/* Hero Section */}
@@ -33,10 +38,10 @@ export const Home = () => {
       <div className="bg-white border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
            {[
-             { icon: Clock, title: 'Rapidité', text: 'Réponse en moins de 24h' },
-             { icon: CheckCircle, title: 'Efficacité', text: 'Solutions sur mesure' },
-             { icon: Shield, title: 'Fiabilité', text: 'Engagement qualité' },
-             { icon: MapPin, title: 'Présence Locale', text: 'Basé à Kribi' }
+             { icon: Clock, title: isEn ? 'Speed' : 'Rapidité', text: isEn ? 'Response in less than 24h' : 'Réponse en moins de 24h' },
+             { icon: CheckCircle, title: isEn ? 'Efficiency' : 'Efficacité', text: isEn ? 'Tailored solutions' : 'Solutions sur mesure' },
+             { icon: Shield, title: isEn ? 'Reliability' : 'Fiabilité', text: isEn ? 'Quality commitment' : 'Engagement qualité' },
+             { icon: MapPin, title: isEn ? 'Local Presence' : 'Présence Locale', text: isEn ? 'Based in Kribi' : 'Basé à Kribi' }
            ].map((item, i) => (
              <div key={i} className="flex flex-col items-center text-center space-y-2 group">
                 <div className="w-12 h-12 rounded-2xl bg-merlin-gray flex items-center justify-center text-merlin-green group-hover:bg-merlin-green group-hover:text-white transition-all transform group-hover:rotate-12">
@@ -57,10 +62,10 @@ export const Home = () => {
           <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
                <div className="w-1 h-8 bg-white/30 hidden md:block" />
-               <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">NOS PRODUITS</h2>
+               <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">{isEn ? 'OUR PRODUCTS' : 'NOS PRODUITS'}</h2>
             </div>
-            <Link href="/produits" className="flex items-center gap-2 group font-black text-white hover:bg-white hover:text-merlin-red transition-all uppercase tracking-[0.2em] text-[10px] px-6 py-2 rounded-full border border-white/30">
-              Voir tout le catalogue <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            <Link href={routes.products} className="flex items-center gap-2 group font-black text-white hover:bg-white hover:text-merlin-red transition-all uppercase tracking-[0.2em] text-[10px] px-6 py-2 rounded-full border border-white/30">
+              {isEn ? 'View full catalog' : 'Voir tout le catalogue'} <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
             </Link>
           </div>
         </div>
@@ -89,11 +94,11 @@ export const Home = () => {
                       {family.description}
                     </p>
                     <div className="pt-6 flex items-center gap-3 text-merlin-green font-bold text-xs uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all">
-                      Découvrir la gamme <ArrowRight className="w-4 h-4" />
+                      {isEn ? 'Explore range' : 'Découvrir la gamme'} <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
                 </div>
-                <Link href={`/produits/${family.slug}`} className="absolute inset-0 z-10" />
+                <Link href={`${routes.products}/${family.slug}`} className="absolute inset-0 z-10" />
               </motion.div>
             ))}
           </div>
@@ -108,10 +113,10 @@ export const Home = () => {
           <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
                <div className="w-1 h-8 bg-white/30 hidden md:block" />
-               <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">NOS SERVICES</h2>
+               <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">{isEn ? 'OUR SERVICES' : 'NOS SERVICES'}</h2>
             </div>
-            <Link href="/contact" className="bg-merlin-black text-white px-8 py-2 rounded-full font-black text-[10px] tracking-widest hover:bg-white hover:text-merlin-black transition-all flex items-center gap-2 uppercase border border-transparent">
-              Demander une étude <ArrowRight className="w-4 h-4" />
+            <Link href={routes.contact} className="bg-merlin-black text-white px-8 py-2 rounded-full font-black text-[10px] tracking-widest hover:bg-white hover:text-merlin-black transition-all flex items-center gap-2 uppercase border border-transparent">
+              {isEn ? 'Request a study' : 'Demander une étude'} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -136,10 +141,10 @@ export const Home = () => {
                     {service.description}
                   </p>
                   <Link
-                    href="/contact"
+                    href={routes.contact}
                     className="flex items-center gap-3 text-merlin-red font-black text-[10px] uppercase tracking-[0.3em] group-hover:gap-5 transition-all"
                   >
-                    Demander ce service <ArrowRight className="w-4 h-4" />
+                    {isEn ? 'Request this service' : 'Demander ce service'} <ArrowRight className="w-4 h-4" />
                   </Link>
                 </motion.div>
               ))}
@@ -155,10 +160,10 @@ export const Home = () => {
           <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
                <div className="w-1 h-8 bg-white/30 hidden md:block" />
-               <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">NOS AGENCES</h2>
+               <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">{isEn ? 'OUR AGENCIES' : 'NOS AGENCES'}</h2>
             </div>
-            <Link href="/agences" className="flex items-center gap-2 group font-black text-white hover:bg-white hover:text-merlin-red transition-all uppercase tracking-[0.2em] text-[10px] px-8 py-2 rounded-full border border-white/30">
-              Voir sur la carte <MapPin className="w-4 h-4" />
+            <Link href={routes.agencies} className="flex items-center gap-2 group font-black text-white hover:bg-white hover:text-merlin-red transition-all uppercase tracking-[0.2em] text-[10px] px-8 py-2 rounded-full border border-white/30">
+              {isEn ? 'View all locations' : 'Voir sur la carte'} <MapPin className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -181,7 +186,7 @@ export const Home = () => {
                       <MapPin className="w-8 h-8" />
                     </div>
                     <span className="bg-red-50 text-merlin-red text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest border border-red-100">
-                      Dispo
+                      {isEn ? 'Open' : 'Dispo'}
                     </span>
                   </div>
                   <h3 className="text-3xl font-black mb-4 uppercase tracking-tight group-hover:text-merlin-red transition-colors">{agency.name}</h3>
@@ -213,7 +218,7 @@ export const Home = () => {
         
         <div className="w-full bg-merlin-gray text-merlin-black py-4 mb-20 shadow-lg border-b-4 border-gray-100 relative z-10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-center">
-            <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">NOS PARTENAIRES</h2>
+            <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">{isEn ? 'OUR PARTNERS' : 'NOS PARTENAIRES'}</h2>
           </div>
         </div>
 
@@ -261,10 +266,10 @@ export const Home = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-16 text-center">
 	             {[
-	               { label: 'Projets Livrés', value: '1.2k', sub: 'Satisfaction client' },
-	               { label: 'Matériaux référencés', value: '5k+', sub: 'Catalogue complet' },
-	               { label: 'Depuis', value: '2018', sub: 'Présence active à Kribi' },
-	               { label: 'Agences Kribi', value: '04', sub: 'Disponibilité maximale' }
+	               { label: isEn ? 'Completed projects' : 'Projets Livrés', value: '1.2k', sub: isEn ? 'Client satisfaction' : 'Satisfaction client' },
+	               { label: isEn ? 'Material references' : 'Matériaux référencés', value: '5k+', sub: isEn ? 'Complete catalog' : 'Catalogue complet' },
+	               { label: isEn ? 'Since' : 'Depuis', value: '2018', sub: isEn ? 'Active in Kribi' : 'Présence active à Kribi' },
+	               { label: isEn ? 'Kribi agencies' : 'Agences Kribi', value: '04', sub: isEn ? 'Maximum availability' : 'Disponibilité maximale' }
 	             ].map((stat, i) => (
                 <motion.div 
                   key={i} 
@@ -314,8 +319,8 @@ export const Home = () => {
 	                    <CheckCircle className="w-6 h-6" />
 	                  </div>
 	                  <div>
-	                    <h4 className="font-black text-xl">Depuis 2018</h4>
-	                    <p className="text-xs text-gray-500">Des années d'expérience au service de vos projets</p>
+	                    <h4 className="font-black text-xl">{isEn ? 'Since 2018' : 'Depuis 2018'}</h4>
+	                    <p className="text-xs text-gray-500">{isEn ? 'Years of experience supporting your projects' : 'Des années d\'expérience au service de vos projets'}</p>
 	                  </div>
 	                </div>
 	              </div>
@@ -324,21 +329,21 @@ export const Home = () => {
 
 	          <div className="space-y-8">
 	             <div className="space-y-4 text-center lg:text-left">
-	                <span className="text-merlin-red font-black text-xs uppercase tracking-widest">Nos Services Et Atouts</span>
-	                <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">VOS PROJETS ENTRE DE <span className="text-merlin-green">BONNES MAINS</span></h2>
+	                <span className="text-merlin-red font-black text-xs uppercase tracking-widest">{isEn ? 'Our services and strengths' : 'Nos Services Et Atouts'}</span>
+	                <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">{isEn ? 'YOUR PROJECTS IN' : 'VOS PROJETS ENTRE DE'} <span className="text-merlin-green">{isEn ? 'GOOD HANDS' : 'BONNES MAINS'}</span></h2>
 	             </div>
 
 	             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 	                {[
-	                  { title: 'Années d\'expérience', desc: 'Nous existons depuis 2018 et accompagnons des projets de toutes tailles.' },
-	                  { title: 'Rapidité et efficacité', desc: 'Notre organisation permet une prise en charge rapide et un service efficace.' },
-	                  { title: 'Prix accessibles', desc: 'Des tarifs adaptés à tous types de clients, particuliers comme professionnels.' },
-	                  { title: 'Service client réactif', desc: 'Une équipe disponible pour répondre vite à vos questions et urgences.' },
-	                  { title: 'Personnel jeune et professionnel', desc: 'Une équipe dynamique, engagée et orientée résultats sur le terrain.' },
-	                  { title: 'Compte client et ravitaillement progressif', desc: 'Possibilité d\'ouvrir un compte client et d\'acheter progressivement selon l\'avancement du chantier.' },
-	                  { title: 'Suivi des commandes', desc: 'Nous suivons chaque commande jusqu\'à sa destination finale.' },
-	                  { title: 'Livraison rapide et flotte de camions', desc: 'Flotte disponible pour des livraisons à moindre coût à Kribi et ses environs.' }
-	                ].map((item, i) => (
+                  { title: isEn ? 'Years of experience' : 'Années d\'expérience', desc: isEn ? 'Founded in 2018, we support projects of all sizes.' : 'Nous existons depuis 2018 et accompagnons des projets de toutes tailles.' },
+                  { title: isEn ? 'Speed and efficiency' : 'Rapidité et efficacité', desc: isEn ? 'Our organization ensures fast handling and efficient service.' : 'Notre organisation permet une prise en charge rapide et un service efficace.' },
+                  { title: isEn ? 'Affordable prices' : 'Prix accessibles', desc: isEn ? 'Rates adapted to all client profiles, individuals and professionals.' : 'Des tarifs adaptés à tous types de clients, particuliers comme professionnels.' },
+                  { title: isEn ? 'Responsive support' : 'Service client réactif', desc: isEn ? 'A team available to answer quickly.' : 'Une équipe disponible pour répondre vite à vos questions et urgences.' },
+                  { title: isEn ? 'Young and professional team' : 'Personnel jeune et professionnel', desc: isEn ? 'Dynamic and results-driven field team.' : 'Une équipe dynamique, engagée et orientée résultats sur le terrain.' },
+                  { title: isEn ? 'Client account & phased supply' : 'Compte client et ravitaillement progressif', desc: isEn ? 'Open a client account and buy progressively based on project milestones.' : 'Possibilité d\'ouvrir un compte client et d\'acheter progressivement selon l\'avancement du chantier.' },
+                  { title: isEn ? 'Order tracking' : 'Suivi des commandes', desc: isEn ? 'We track each order up to final destination.' : 'Nous suivons chaque commande jusqu\'à sa destination finale.' },
+                  { title: isEn ? 'Fast delivery and truck fleet' : 'Livraison rapide et flotte de camions', desc: isEn ? 'Fleet available for lower-cost deliveries around Kribi.' : 'Flotte disponible pour des livraisons à moindre coût à Kribi et ses environs.' }
+                ].map((item, i) => (
 	                  <div key={i} className="p-6 bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
 	                    <h4 className="text-lg font-black text-merlin-black mb-2">{item.title}</h4>
 	                    <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
@@ -348,10 +353,10 @@ export const Home = () => {
 
              <div className="pt-8">
                 <Link
-                  href="/a-propos"
+                  href={routes.about}
                   className="inline-block bg-merlin-black text-white px-8 py-4 rounded-full font-bold text-sm tracking-widest hover:bg-merlin-red transition-all shadow-xl shadow-black/20"
 	                >
-	                  EN SAVOIR PLUS SUR MERLIN
+	                  {isEn ? 'LEARN MORE ABOUT MERLIN' : 'EN SAVOIR PLUS SUR MERLIN'}
 	                </Link>
 	             </div>
 	          </div>
@@ -362,29 +367,29 @@ export const Home = () => {
 	      <section className="py-24 px-6 md:px-12 bg-white">
 	        <div className="max-w-7xl mx-auto space-y-12">
 	          <div className="text-center space-y-4">
-	            <span className="text-merlin-red font-black text-xs uppercase tracking-widest">Avis Clients</span>
-	            <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">TÉMOIGNAGES</h2>
+	            <span className="text-merlin-red font-black text-xs uppercase tracking-widest">{isEn ? 'Client reviews' : 'Avis Clients'}</span>
+	            <h2 className="text-4xl md:text-6xl font-black font-outfit uppercase">{isEn ? 'TESTIMONIALS' : 'TÉMOIGNAGES'}</h2>
 	            <p className="text-gray-500 max-w-3xl mx-auto">
-	              La satisfaction de nos clients est au cœur de notre engagement quotidien.
+	              {isEn ? 'Customer satisfaction is at the heart of our daily commitment.' : 'La satisfaction de nos clients est au cœur de notre engagement quotidien.'}
 	            </p>
 	          </div>
 
 	          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 	            {[
 	              {
-	                name: 'Client BTP à Kribi',
-	                role: 'Approvisionnement chantier',
-	                quote: 'MERLIN nous fournit rapidement les matériaux, et le suivi des commandes est très sérieux jusqu\'à la livraison finale.',
+	                name: isEn ? 'Construction client in Kribi' : 'Client BTP à Kribi',
+	                role: isEn ? 'Site supply' : 'Approvisionnement chantier',
+	                quote: isEn ? 'MERLIN supplies materials quickly, with reliable end-to-end order tracking.' : 'MERLIN nous fournit rapidement les matériaux, et le suivi des commandes est très sérieux jusqu\'à la livraison finale.',
 	              },
 	              {
-	                name: 'Cliente Particulière',
-	                role: 'Projet de construction maison',
-	                quote: 'Les prix sont accessibles, l\'équipe est professionnelle et nous avons apprécié la possibilité d\'achat progressif selon l\'avancement du projet.',
+	                name: isEn ? 'Private client' : 'Cliente Particulière',
+	                role: isEn ? 'Home construction project' : 'Projet de construction maison',
+	                quote: isEn ? 'Affordable pricing, professional team, and progressive purchasing based on project progress.' : 'Les prix sont accessibles, l\'équipe est professionnelle et nous avons apprécié la possibilité d\'achat progressif selon l\'avancement du projet.',
 	              },
 	              {
-	                name: 'Entrepreneur Local',
-	                role: 'Travaux et logistique',
-	                quote: 'Service client réactif, livraisons rapides et flotte de camions disponible. Une vraie solution de proximité à Kribi.',
+	                name: isEn ? 'Local contractor' : 'Entrepreneur Local',
+	                role: isEn ? 'Works and logistics' : 'Travaux et logistique',
+	                quote: isEn ? 'Responsive support, fast deliveries and available truck fleet. A true local solution in Kribi.' : 'Service client réactif, livraisons rapides et flotte de camions disponible. Une vraie solution de proximité à Kribi.',
 	              },
 	            ].map((review, i) => (
 	              <motion.div
@@ -410,14 +415,14 @@ export const Home = () => {
       {/* CTA Section */}
       <section className="bg-merlin-green py-20 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-8 text-white">
-           <h2 className="text-4xl md:text-5xl font-black font-outfit uppercase">Besoin d'un partenaire fiable pour votre projet ?</h2>
-           <p className="text-xl text-white/80 max-w-2xl mx-auto">Rejoignez les centaines de clients qui font confiance à MERLIN pour l'excellence de ses services à Kribi.</p>
+           <h2 className="text-4xl md:text-5xl font-black font-outfit uppercase">{isEn ? 'Need a reliable partner for your project?' : 'Besoin d\'un partenaire fiable pour votre projet ?'}</h2>
+           <p className="text-xl text-white/80 max-w-2xl mx-auto">{isEn ? 'Join the hundreds of customers who trust MERLIN for service excellence in Kribi.' : 'Rejoignez les centaines de clients qui font confiance à MERLIN pour l\'excellence de ses services à Kribi.'}</p>
            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-              <Link href="/contact" className="w-full sm:w-auto bg-white text-merlin-green px-8 py-4 rounded-full font-black text-base sm:text-lg hover:scale-105 transition-transform shadow-2xl uppercase tracking-widest">
-                 Démarrer mon projet
+              <Link href={routes.contact} className="w-full sm:w-auto bg-white text-merlin-green px-8 py-4 rounded-full font-black text-base sm:text-lg hover:scale-105 transition-transform shadow-2xl uppercase tracking-widest">
+                 {isEn ? 'Start my project' : 'Démarrer mon projet'}
               </Link>
               <a href="tel:+237695425970" className="w-full sm:w-auto text-center bg-merlin-black/20 border-2 border-white/30 text-white px-8 py-4 rounded-full font-black text-base sm:text-lg hover:bg-white/10 transition-colors uppercase tracking-widest">
-                 Nous appeler
+                 {isEn ? 'Call us' : 'Nous appeler'}
               </a>
            </div>
         </div>

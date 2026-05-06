@@ -5,8 +5,13 @@ import { PRODUCT_FAMILIES } from '../constants';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
+import type { Locale } from '../lib/i18n';
+import { ROUTES } from '../lib/i18n';
 
-export const ProductsPage = () => {
+export const ProductsPage = ({ locale = 'fr' }: { locale?: Locale }) => {
+  const isEn = locale === 'en';
+  const routes = ROUTES[locale];
+
   return (
     <div className="bg-merlin-gray min-h-screen pb-24">
       {/* Dynamic Banner */}
@@ -15,15 +20,17 @@ export const ProductsPage = () => {
         <div className="max-w-7xl mx-auto relative z-10 text-center md:text-left">
           <div className="inline-block mb-6">
             <span className="text-merlin-green font-black text-xs uppercase tracking-[0.3em] px-6 py-2 bg-green-50 rounded-full border border-green-100 shadow-sm">
-              Collections 2024
+              {isEn ? '2024 Collections' : 'Collections 2024'}
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-8xl font-black font-outfit uppercase leading-[0.9]">
-            NOS <span className="text-merlin-red">PRODUITS</span><br />
-            <span className="text-merlin-black/10">SÉLECTIONNÉS</span>
+            {isEn ? 'OUR' : 'NOS'} <span className="text-merlin-red">{isEn ? 'PRODUCTS' : 'PRODUITS'}</span><br />
+            <span className="text-merlin-black/10">{isEn ? 'SELECTED' : 'SÉLECTIONNÉS'}</span>
           </h1>
           <p className="mt-6 text-gray-500 max-w-2xl text-base sm:text-lg md:text-xl leading-relaxed font-medium italic">
-            "La qualité sans compromis pour les bâtisseurs de Kribi. Chaque matériau est rigoureusement testé pour durer."
+            {isEn
+              ? '"Uncompromising quality for builders in Kribi. Every material is rigorously tested to last."'
+              : '"La qualité sans compromis pour les bâtisseurs de Kribi. Chaque matériau est rigoureusement testé pour durer."'}
           </p>
         </div>
       </div>
@@ -51,7 +58,7 @@ export const ProductsPage = () => {
                 {/* Floating Info */}
                 <div className="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                    <span className="text-merlin-green font-black text-[9px] uppercase tracking-widest bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-white">
-                      Certifié Merlin
+                      {isEn ? 'Merlin certified' : 'Certifié Merlin'}
                    </span>
                 </div>
               </div>
@@ -69,10 +76,10 @@ export const ProductsPage = () => {
                 </p>
                 
                 <Link
-                  href={`/produits/${family.slug}`}
+                  href={`${routes.products}/${family.slug}`}
                   className="w-full py-5 rounded-2xl bg-merlin-gray text-merlin-black font-black text-xs tracking-[0.2em] text-center group-hover:bg-merlin-black group-hover:text-white transition-all flex items-center justify-center gap-3 uppercase"
                 >
-                  Détails de la gamme <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {isEn ? 'Range details' : 'Détails de la gamme'} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </motion.div>
@@ -84,14 +91,14 @@ export const ProductsPage = () => {
       <div className="max-w-7xl mx-auto px-6 mt-24">
         <div className="bg-merlin-green rounded-[3rem] p-12 md:p-20 text-white flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
            <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-black font-outfit uppercase">Besoin d'un devis groupé ?</h2>
-              <p className="text-white/70 text-lg">Envoyez-nous votre liste de matériaux et recevez une offre personnalisée.</p>
+              <h2 className="text-4xl md:text-5xl font-black font-outfit uppercase">{isEn ? 'Need a bulk quote?' : 'Besoin d\'un devis groupé ?'}</h2>
+              <p className="text-white/70 text-lg">{isEn ? 'Send us your materials list and get a personalized offer.' : 'Envoyez-nous votre liste de matériaux et recevez une offre personnalisée.'}</p>
            </div>
            <Link
-             href="/contact"
+             href={routes.contact}
              className="w-full sm:w-auto bg-white text-merlin-green px-8 py-4 sm:px-12 sm:py-6 rounded-full font-black text-base sm:text-xl hover:scale-105 transition-transform shadow-2xl uppercase tracking-widest"
            >
-              Contacter Merlin
+              {isEn ? 'Contact Merlin' : 'Contacter Merlin'}
            </Link>
         </div>
       </div>

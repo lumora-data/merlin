@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   keywords: SEO_KEYWORDS,
   alternates: {
     canonical: '/',
+    languages: {
+      'fr-CM': '/',
+      en: '/en',
+    },
   },
   category: 'business',
   applicationName: SITE_NAME,

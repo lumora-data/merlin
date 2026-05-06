@@ -5,17 +5,24 @@ import { REALIZATIONS } from '../constants';
 import { motion, AnimatePresence } from 'motion/react';
 import { Maximize2 } from 'lucide-react';
 import Link from 'next/link';
+import type { Locale } from '../lib/i18n';
+import { ROUTES } from '../lib/i18n';
 
-export const RealizationsPage = () => {
+export const RealizationsPage = ({ locale = 'fr' }: { locale?: Locale }) => {
+  const isEn = locale === 'en';
+  const routes = ROUTES[locale];
+
   return (
     <div className="bg-merlin-gray min-h-screen pb-24">
       {/* Banner */}
       <div className="bg-white py-16 md:py-24 px-6 text-center border-b border-gray-100">
         <div className="max-w-7xl mx-auto space-y-6">
-          <span className="text-merlin-yellow font-black text-xs uppercase tracking-widest px-4 py-1 bg-yellow-50 rounded-full border border-yellow-100">Notre Expertise en Images</span>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-outfit uppercase">NOS <span className="text-merlin-red">RÉALISATIONS</span></h1>
+          <span className="text-merlin-yellow font-black text-xs uppercase tracking-widest px-4 py-1 bg-yellow-50 rounded-full border border-yellow-100">{isEn ? 'Our expertise in pictures' : 'Notre Expertise en Images'}</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-outfit uppercase">{isEn ? 'OUR' : 'NOS'} <span className="text-merlin-red">{isEn ? 'PROJECTS' : 'RÉALISATIONS'}</span></h1>
           <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
-            Parcourez notre galerie de projets réussis. Chaque image témoigne de notre engagement envers la qualité et la satisfaction client.
+            {isEn
+              ? 'Browse our gallery of successful projects. Every image reflects our commitment to quality and customer satisfaction.'
+              : 'Parcourez notre galerie de projets réussis. Chaque image témoigne de notre engagement envers la qualité et la satisfaction client.'}
           </p>
         </div>
       </div>
@@ -57,14 +64,14 @@ export const RealizationsPage = () => {
       <div className="max-w-7xl mx-auto px-6 mt-24">
          <div className="bg-merlin-red rounded-[3rem] p-12 md:p-20 text-white flex flex-col md:flex-row items-center justify-between gap-12 font-outfit">
             <div className="space-y-4 text-center md:text-left">
-               <h2 className="text-4xl md:text-6xl font-black uppercase leading-tight">Votre projet mérite <br /> l'excellence MERLIN</h2>
-               <p className="text-white/70 text-lg">Confiez-nous vos idées, nous les transformons en réalité.</p>
+               <h2 className="text-4xl md:text-6xl font-black uppercase leading-tight">{isEn ? 'Your project deserves' : 'Votre projet mérite'} <br /> {isEn ? 'MERLIN excellence' : 'l\'excellence MERLIN'}</h2>
+               <p className="text-white/70 text-lg">{isEn ? 'Trust us with your ideas, we turn them into reality.' : 'Confiez-nous vos idées, nous les transformons en réalité.'}</p>
             </div>
             <Link
-              href="/contact"
+              href={routes.contact}
               className="w-full sm:w-auto text-center bg-white text-merlin-red px-8 py-4 sm:px-12 sm:py-6 rounded-full font-black text-base sm:text-xl hover:scale-105 transition-transform shadow-2xl uppercase tracking-widest"
             >
-               Lancer un projet
+               {isEn ? 'Start a project' : 'Lancer un projet'}
             </Link>
          </div>
       </div>

@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { motion } from 'motion/react';
-import { Phone, Mail, MapPin, Send, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import type { Locale } from '../lib/i18n';
 
-export const ContactPage = () => {
+export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
+  const isEn = locale === 'en';
   const [status, setStatus] = React.useState<'idle' | 'sending' | 'success'>('idle');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -18,10 +20,12 @@ export const ContactPage = () => {
       {/* Banner */}
       <div className="bg-white py-16 md:py-24 px-6 text-center border-b border-gray-100">
         <div className="max-w-7xl mx-auto space-y-6">
-          <span className="text-merlin-red font-black text-xs uppercase tracking-widest px-4 py-1 bg-red-50 rounded-full border border-red-100">Contactez-nous</span>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-outfit uppercase">PARLONS DE VOTRE <span className="text-merlin-green">PROJET</span></h1>
+          <span className="text-merlin-red font-black text-xs uppercase tracking-widest px-4 py-1 bg-red-50 rounded-full border border-red-100">{isEn ? 'Contact us' : 'Contactez-nous'}</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black font-outfit uppercase">{isEn ? 'LET’S TALK ABOUT YOUR' : 'PARLONS DE VOTRE'} <span className="text-merlin-green">{isEn ? 'PROJECT' : 'PROJET'}</span></h1>
           <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
-            Une question ? Un devis ? Notre équipe réactive est à votre écoute pour vous proposer les meilleures solutions à Kribi.
+            {isEn
+              ? 'A question? A quote request? Our responsive team is ready to provide the best solutions in Kribi.'
+              : 'Une question ? Un devis ? Notre équipe réactive est à votre écoute pour vous proposer les meilleures solutions à Kribi.'}
           </p>
         </div>
       </div>
@@ -31,20 +35,20 @@ export const ContactPage = () => {
           {/* Contact Info */}
           <div className="space-y-12">
              <div className="space-y-6">
-                <h2 className="text-3xl font-black uppercase tracking-tight">INFORMATIONS DE <span className="text-merlin-red">CONTACT</span></h2>
-                <p className="text-gray-500">Choisissez le canal qui vous convient le mieux, nous vous répondrons dans les plus brefs délais.</p>
+                <h2 className="text-3xl font-black uppercase tracking-tight">{isEn ? 'CONTACT' : 'INFORMATIONS DE'} <span className="text-merlin-red">{isEn ? 'INFORMATION' : 'CONTACT'}</span></h2>
+                <p className="text-gray-500">{isEn ? 'Choose the channel that suits you best, we will respond as quickly as possible.' : 'Choisissez le canal qui vous convient le mieux, nous vous répondrons dans les plus brefs délais.'}</p>
              </div>
 
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                  { icon: Phone, label: 'Téléphone', value: '+237 695 42 59 70', sub: '+237 222 462 523', color: 'bg-merlin-red' },
-                  { icon: Mail, label: 'Email', value: 'merlincameroun@gmail.com', sub: 'Réponse sous 24h', color: 'bg-merlin-green' },
-                  { icon: MapPin, label: 'Localisation', value: 'Kribi, Cameroun', sub: 'Siège social', color: 'bg-merlin-black' },
+                  { icon: Phone, label: isEn ? 'Phone' : 'Téléphone', value: '+237 695 42 59 70', sub: '+237 222 462 523', color: 'bg-merlin-red' },
+                  { icon: Mail, label: 'Email', value: 'merlincameroun@gmail.com', sub: isEn ? 'Reply within 24h' : 'Réponse sous 24h', color: 'bg-merlin-green' },
+                  { icon: MapPin, label: isEn ? 'Location' : 'Localisation', value: 'Kribi, Cameroun', sub: isEn ? 'Head office' : 'Siège social', color: 'bg-merlin-black' },
                   { 
                     isWhatsApp: true,
                     label: 'WhatsApp', 
                     value: '+237 695 42 59 70', 
-                    sub: 'Conseils rapides', 
+                    sub: isEn ? 'Quick guidance' : 'Conseils rapides', 
                     color: 'bg-[#25D366]' 
                   }
                 ].map((item, i) => (
@@ -66,14 +70,14 @@ export const ContactPage = () => {
              </div>
 
              <div className="bg-merlin-black p-10 rounded-[3rem] text-white space-y-4">
-                <h3 className="text-xl font-bold uppercase text-merlin-yellow">Horaires de bureau</h3>
+                <h3 className="text-xl font-bold uppercase text-merlin-yellow">{isEn ? 'Opening hours' : 'Horaires de bureau'}</h3>
                 <div className="flex justify-between items-center text-sm border-b border-white/10 py-3">
-                   <span className="text-gray-400">Lundi — Samedi</span>
+                   <span className="text-gray-400">{isEn ? 'Monday — Saturday' : 'Lundi — Samedi'}</span>
                    <span className="font-bold">07:30 — 18:00</span>
                 </div>
                 <div className="flex justify-between items-center text-sm py-3">
-                   <span className="text-gray-400">Jours fériés</span>
-                   <span className="font-bold">Ouvert</span>
+                   <span className="text-gray-400">{isEn ? 'Public holidays' : 'Jours fériés'}</span>
+                   <span className="font-bold">{isEn ? 'Open' : 'Ouvert'}</span>
                 </div>
              </div>
           </div>
@@ -89,27 +93,27 @@ export const ContactPage = () => {
                 <div className="w-24 h-24 rounded-full bg-merlin-green text-white flex items-center justify-center shadow-xl shadow-green-500/20">
                   <Send className="w-10 h-10" />
                 </div>
-                <h3 className="text-3xl font-black uppercase">Message Envoyé !</h3>
-                <p className="text-gray-500 max-w-xs">Merci de nous avoir contacté. Un conseiller MERLIN reviendra vers vous très prochainement.</p>
+                <h3 className="text-3xl font-black uppercase">{isEn ? 'Message sent!' : 'Message Envoyé !'}</h3>
+                <p className="text-gray-500 max-w-xs">{isEn ? 'Thanks for contacting us. A MERLIN advisor will get back to you shortly.' : 'Merci de nous avoir contacté. Un conseiller MERLIN reviendra vers vous très prochainement.'}</p>
                 <button
                   onClick={() => setStatus('idle')}
                   className="text-merlin-green font-bold hover:underline"
                 >
-                  Envoyer un autre message
+                  {isEn ? 'Send another message' : 'Envoyer un autre message'}
                 </button>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <h3 className="text-2xl font-black uppercase tracking-tight mb-8">DEMANDER UN <span className="text-merlin-green">DEVIS</span></h3>
+                <h3 className="text-2xl font-black uppercase tracking-tight mb-8">{isEn ? 'REQUEST A' : 'DEMANDER UN'} <span className="text-merlin-green">{isEn ? 'QUOTE' : 'DEVIS'}</span></h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Nom Complet</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{isEn ? 'Full name' : 'Nom Complet'}</label>
                     <input
                       required
                       type="text"
                       className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green"
-                      placeholder="Jean Dupont"
+                      placeholder={isEn ? 'John Doe' : 'Jean Dupont'}
                     />
                   </div>
                   <div className="space-y-2">
@@ -125,7 +129,7 @@ export const ContactPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Téléphone</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{isEn ? 'Phone' : 'Téléphone'}</label>
                     <input
                       required
                       type="tel"
@@ -134,26 +138,26 @@ export const ContactPage = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Service Demandé</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{isEn ? 'Requested service' : 'Service Demandé'}</label>
                     <select
                       className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green appearance-none font-medium"
                     >
-                      <option>Construction</option>
-                      <option>Logistique & Transport</option>
-                      <option>Commerce Général</option>
-                      <option>Négoce</option>
-                      <option>Autre</option>
+                      <option>{isEn ? 'Construction' : 'Construction'}</option>
+                      <option>{isEn ? 'Logistics & Transport' : 'Logistique & Transport'}</option>
+                      <option>{isEn ? 'General Trading' : 'Commerce Général'}</option>
+                      <option>{isEn ? 'Trading' : 'Négoce'}</option>
+                      <option>{isEn ? 'Other' : 'Autre'}</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Votre Message</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{isEn ? 'Your message' : 'Votre Message'}</label>
                   <textarea
                     required
                     rows={5}
                     className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green resize-none"
-                    placeholder="Détaillez votre besoin ici..."
+                    placeholder={isEn ? 'Describe your needs here...' : 'Détaillez votre besoin ici...'}
                   />
                 </div>
 
@@ -162,8 +166,8 @@ export const ContactPage = () => {
                   disabled={status === 'sending'}
                   className="w-full bg-merlin-green text-white py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-2xl shadow-green-500/30 hover:bg-green-700 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
                 >
-                  {status === 'sending' ? 'Envoi en cours...' : (
-                    <>Envoyer ma demande <Send className="w-4 h-4" /></>
+                  {status === 'sending' ? (isEn ? 'Sending...' : 'Envoi en cours...') : (
+                    <>{isEn ? 'Send my request' : 'Envoyer ma demande'} <Send className="w-4 h-4" /></>
                   )}
                 </button>
               </form>
