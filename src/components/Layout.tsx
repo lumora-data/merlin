@@ -118,7 +118,7 @@ export const Header = () => {
         <Link href={routes.home} className="shrink-0 flex items-center gap-2 sm:gap-3" aria-label={isEn ? 'Home' : 'Accueil'}>
           <img
             src="/images/logo.jpg"
-            alt="Logo Merlin Cameroun"
+            alt={isEn ? 'Merlin Cameroon logo' : 'Logo Merlin Cameroun'}
             className="h-12 w-auto sm:h-14 object-contain"
           />
           <div className="flex items-baseline gap-1 leading-none">
@@ -283,7 +283,7 @@ export const Footer = () => {
           <div className="flex items-center gap-3">
             <img
               src="/images/logo.jpg"
-              alt="Logo Merlin Cameroun"
+              alt={isEn ? 'Merlin Cameroon logo' : 'Logo Merlin Cameroun'}
               className="h-16 w-auto object-contain"
             />
             <div className="flex items-baseline gap-1 leading-none">
@@ -323,7 +323,7 @@ export const Footer = () => {
 	          <ul className="space-y-4 text-sm text-gray-400">
             <li className="flex items-start gap-3">
               <span className="font-bold text-white">{isEn ? 'Address:' : 'Adresse:'}</span>
-              Kribi, Cameroun
+              {isEn ? 'Kribi, Cameroon' : 'Kribi, Cameroun'}
             </li>
             <li className="flex items-start gap-3">
               <span className="font-bold text-white">{isEn ? 'Phone:' : 'Téléphone:'}</span>

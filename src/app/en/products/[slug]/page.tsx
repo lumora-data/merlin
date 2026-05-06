@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { ProductDetailPage } from '../../../../views/ProductDetail';
 import { PRODUCT_FAMILIES } from '../../../../constants';
 import { SITE_NAME, SITE_URL } from '../../../../lib/site';
+import { localizeProductFamily } from '../../../../lib/localized-content';
 
 type Params = { slug: string };
 type PageProps = { params: Promise<Params> };
@@ -15,7 +16,8 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const baseProduct = getProductBySlug(slug);
+  const product = baseProduct ? localizeProductFamily(baseProduct, 'en') : undefined;
 
   if (!product) {
     return {
@@ -47,7 +49,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function EnProductDetailsPage({ params }: PageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const baseProduct = getProductBySlug(slug);
+  const product = baseProduct ? localizeProductFamily(baseProduct, 'en') : undefined;
 
   if (!product) {
     notFound();

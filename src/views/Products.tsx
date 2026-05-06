@@ -7,10 +7,12 @@ import Link from 'next/link';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 import type { Locale } from '../lib/i18n';
 import { ROUTES } from '../lib/i18n';
+import { localizeProductFamilies } from '../lib/localized-content';
 
 export const ProductsPage = ({ locale = 'fr' }: { locale?: Locale }) => {
   const isEn = locale === 'en';
   const routes = ROUTES[locale];
+  const productFamilies = localizeProductFamilies(PRODUCT_FAMILIES, locale);
 
   return (
     <div className="bg-merlin-gray min-h-screen pb-24">
@@ -38,7 +40,7 @@ export const ProductsPage = ({ locale = 'fr' }: { locale?: Locale }) => {
       {/* Modern Grid Layout */}
       <div className="max-w-7xl mx-auto px-6 -mt-16 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {PRODUCT_FAMILIES.map((family, i) => (
+          {productFamilies.map((family, i) => (
             <motion.div
               key={family.id}
               initial={{ opacity: 0, y: 40 }}

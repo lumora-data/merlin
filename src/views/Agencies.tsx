@@ -5,9 +5,11 @@ import { AGENCIES } from '../constants';
 import { motion } from 'motion/react';
 import { Phone, MapPin, Clock } from 'lucide-react';
 import type { Locale } from '../lib/i18n';
+import { localizeAgencies } from '../lib/localized-content';
 
 export const AgenciesPage = ({ locale = 'fr' }: { locale?: Locale }) => {
   const isEn = locale === 'en';
+  const agencies = localizeAgencies(AGENCIES, locale);
 
   return (
     <div className="bg-merlin-gray min-h-screen pb-24">
@@ -26,7 +28,7 @@ export const AgenciesPage = ({ locale = 'fr' }: { locale?: Locale }) => {
 
       <div className="max-w-7xl mx-auto px-6 mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {AGENCIES.map((agency, i) => (
+          {agencies.map((agency, i) => (
             <motion.div
               key={agency.id}
               initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}

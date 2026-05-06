@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, CheckCircle2, ShieldCheck, Truck, ShoppingCart } from 'lucide-react';
 import type { Locale } from '../lib/i18n';
 import { ROUTES } from '../lib/i18n';
+import { localizeProductFamilies, localizeProductFamily } from '../lib/localized-content';
 
 export const ProductDetailPage = ({ locale = 'fr' }: { locale?: Locale }) => {
   const params = useParams<{ slug: string | string[] }>();
@@ -15,7 +16,9 @@ export const ProductDetailPage = ({ locale = 'fr' }: { locale?: Locale }) => {
   const isEn = locale === 'en';
   const routes = ROUTES[locale];
   const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
-  const product = PRODUCT_FAMILIES.find((p) => p.slug === slug);
+  const rawProduct = PRODUCT_FAMILIES.find((p) => p.slug === slug);
+  const product = rawProduct ? localizeProductFamily(rawProduct, locale) : undefined;
+  const localizedProducts = localizeProductFamilies(PRODUCT_FAMILIES, locale);
 
   const [activeImage, setActiveImage] = React.useState(0);
 
@@ -178,7 +181,7 @@ export const ProductDetailPage = ({ locale = 'fr' }: { locale?: Locale }) => {
             <Link href={routes.products} className="text-merlin-green font-bold uppercase text-sm hover:underline">{isEn ? 'View full catalog' : 'Voir tout le catalogue'}</Link>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {PRODUCT_FAMILIES.filter((p) => p.id !== product.id).slice(0, 4).map((other) => (
+            {localizedProducts.filter((p) => p.id !== product.id).slice(0, 4).map((other) => (
               <Link 
                 key={other.id} 
                 href={`${routes.products}/${other.slug}`}

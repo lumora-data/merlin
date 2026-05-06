@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { PRODUCT_FAMILIES } from '../constants';
+import type { Locale } from '../lib/i18n';
+import { ROUTES } from '../lib/i18n';
+import { localizeProductFamilies } from '../lib/localized-content';
 import heroData from '../../content/hero.json';
 
 type Slide = {
@@ -18,17 +21,20 @@ const heroSlides: Slide[] = (heroData as Slide[]).map((slide) => ({
   image: encodeURI(slide.image),
 }));
 
-const productSlides: Slide[] = PRODUCT_FAMILIES.flatMap((family) =>
-  family.images.map((image, index) => ({
-    id: `product-${family.slug}-${index}`,
-    image,
-    alt: family.title,
-  })),
-);
+export const HeroSlider = ({ locale = 'fr' }: { locale?: Locale }) => {
+  const isEn = locale === 'en';
+  const routes = ROUTES[locale];
+  const localizedFamilies = localizeProductFamilies(PRODUCT_FAMILIES, locale);
 
-const slides: Slide[] = [...heroSlides, ...productSlides];
+  const productSlides: Slide[] = localizedFamilies.flatMap((family) =>
+    family.images.map((image, index) => ({
+      id: `product-${family.slug}-${index}`,
+      image,
+      alt: family.title,
+    })),
+  );
 
-export const HeroSlider = () => {
+  const slides: Slide[] = [...heroSlides, ...productSlides];
   const [current, setCurrent] = React.useState(0);
 
   const next = () => setCurrent((prev) => (prev + 1) % slides.length);
@@ -55,14 +61,14 @@ export const HeroSlider = () => {
         <button
           onClick={prev}
           className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-merlin-black/90 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-30 hover:scale-110 shadow-xl"
-          aria-label="Image précédente"
+          aria-label={isEn ? 'Previous image' : 'Image précédente'}
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
         <button
           onClick={next}
           className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-merlin-black/90 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-30 hover:scale-110 shadow-xl"
-          aria-label="Image suivante"
+          aria-label={isEn ? 'Next image' : 'Image suivante'}
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
@@ -78,8 +84,8 @@ export const HeroSlider = () => {
               transition={{ duration: 0.6, ease: 'easeInOut' }}
               className="flex md:hidden w-full h-full rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white"
             >
-              <Link href="/produits" className="w-full h-full">
-                <img src={slides[current].image} className="w-full h-full object-cover" alt="Catalogue Merlin" />
+              <Link href={routes.products} className="w-full h-full">
+                <img src={slides[current].image} className="w-full h-full object-cover" alt={slides[current].alt} />
               </Link>
             </motion.div>
 
@@ -93,15 +99,15 @@ export const HeroSlider = () => {
                 transition={{ duration: 0.5 }}
                 className="hidden md:flex flex-1 h-full rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white group/slide"
               >
-                <Link href="/produits" className="w-full h-full relative">
+                <Link href={routes.products} className="w-full h-full relative">
                   <img
                     src={slides[index].image}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover/slide:scale-110"
                     alt={slides[index].alt}
                   />
                   <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-merlin-black/80 to-transparent opacity-0 group-hover/slide:opacity-100 transition-opacity">
-                    <span className="text-merlin-green font-black text-[10px] tracking-widest uppercase">Voir nos produits</span>
-                    <h4 className="text-white font-bold uppercase truncate">Catalogue Merlin</h4>
+                    <span className="text-merlin-green font-black text-[10px] tracking-widest uppercase">{isEn ? 'View our products' : 'Voir nos produits'}</span>
+                    <h4 className="text-white font-bold uppercase truncate">{isEn ? 'Merlin catalog' : 'Catalogue Merlin'}</h4>
                   </div>
                 </Link>
               </motion.div>
@@ -116,7 +122,7 @@ export const HeroSlider = () => {
             key={i}
             onClick={() => setCurrent(i)}
             className={`h-2 rounded-full transition-all ${current === i ? 'bg-merlin-green w-10' : 'bg-gray-300 w-2'}`}
-            aria-label={`Aller à l'image ${i + 1}`}
+            aria-label={isEn ? `Go to image ${i + 1}` : `Aller à l'image ${i + 1}`}
           />
         ))}
       </div>

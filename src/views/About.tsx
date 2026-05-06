@@ -121,7 +121,7 @@ export const AboutPage = ({ locale = 'fr' }: { locale?: Locale }) => {
               >
                 <img
                   src={image}
-                  alt={`Conférence Merlin Cameroun ${i + 1}`}
+                  alt={isEn ? `Merlin conference ${i + 1}` : `Conférence Merlin Cameroun ${i + 1}`}
                   className="w-full h-[320px] md:h-[380px] object-cover"
                 />
               </motion.div>
@@ -158,7 +158,7 @@ export const AboutPage = ({ locale = 'fr' }: { locale?: Locale }) => {
               <div className="grid grid-cols-2 gap-4">
                  <div className="space-y-4 pt-12">
                      <div className="h-64 rounded-3xl overflow-hidden shadow-2xl">
-                        <img src={encodeURI('/images/about/about-us-02.jpg')} className="w-full h-full object-cover" alt="Équipe Merlin" />
+                        <img src={encodeURI('/images/about/about-us-02.jpg')} className="w-full h-full object-cover" alt={isEn ? 'Merlin team' : 'Équipe Merlin'} />
                      </div>
                      <div className="h-48 rounded-3xl overflow-hidden shadow-2xl bg-merlin-red flex items-center justify-center p-8 text-center">
                         <p className="text-2xl font-black uppercase">{isEn ? 'Absolute speed' : 'Rapidité Absolue'}</p>
@@ -169,7 +169,7 @@ export const AboutPage = ({ locale = 'fr' }: { locale?: Locale }) => {
                         <p className="text-2xl font-black uppercase">{isEn ? '100% Efficient' : '100% Efficace'}</p>
                      </div>
                      <div className="h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-merlin-yellow">
-                        <img src={encodeURI('/images/about/about-us-03.jpg')} className="w-full h-full object-cover" alt="Réalisation Merlin" />
+                        <img src={encodeURI('/images/about/about-us-03.jpg')} className="w-full h-full object-cover" alt={isEn ? 'Merlin project' : 'Réalisation Merlin'} />
                      </div>
                  </div>
               </div>

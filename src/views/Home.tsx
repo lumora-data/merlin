@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import type { Locale } from '../lib/i18n';
 import { ROUTES } from '../lib/i18n';
+import { localizeAgencies, localizeProductFamilies, localizeServices } from '../lib/localized-content';
 
 const serviceIcons = {
   settings: Settings,
@@ -28,11 +29,14 @@ const serviceIcons = {
 export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
   const isEn = locale === 'en';
   const routes = ROUTES[locale];
+  const productFamilies = localizeProductFamilies(PRODUCT_FAMILIES, locale);
+  const services = localizeServices(SERVICES, locale);
+  const agencies = localizeAgencies(AGENCIES, locale);
 
   return (
     <div className="bg-merlin-gray">
       {/* Hero Section */}
-      <HeroSlider />
+      <HeroSlider locale={locale} />
 
       {/* Stats / Features Band */}
       <div className="bg-white border-y border-gray-100">
@@ -72,7 +76,7 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-            {PRODUCT_FAMILIES.slice(0, 6).map((family, i) => (
+            {productFamilies.slice(0, 6).map((family, i) => (
               <motion.div
                 key={family.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -123,7 +127,7 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {SERVICES.map((service, i) => (
+              {services.map((service, i) => (
                 <motion.div
                   key={service.id}
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -170,7 +174,7 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {AGENCIES.map((agency, i) => (
+            {agencies.map((agency, i) => (
               <motion.div
                 key={agency.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -252,7 +256,7 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
                 <img
                   key={i}
                   src={partner}
-                  alt="Partenaire Merlin"
+                  alt={isEn ? 'Merlin partner' : 'Partenaire Merlin'}
                   className="h-14 sm:h-16 md:h-20 w-auto object-contain shrink-0 mix-blend-multiply opacity-90 hover:opacity-100 transition-opacity duration-300"
                 />
              ))}

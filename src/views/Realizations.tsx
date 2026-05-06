@@ -7,10 +7,12 @@ import { Maximize2 } from 'lucide-react';
 import Link from 'next/link';
 import type { Locale } from '../lib/i18n';
 import { ROUTES } from '../lib/i18n';
+import { localizeRealizations } from '../lib/localized-content';
 
 export const RealizationsPage = ({ locale = 'fr' }: { locale?: Locale }) => {
   const isEn = locale === 'en';
   const routes = ROUTES[locale];
+  const realizations = localizeRealizations(REALIZATIONS, locale);
 
   return (
     <div className="bg-merlin-gray min-h-screen pb-24">
@@ -30,7 +32,7 @@ export const RealizationsPage = ({ locale = 'fr' }: { locale?: Locale }) => {
       {/* Gallery Grid */}
       <div className="max-w-7xl mx-auto px-6 mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <AnimatePresence mode="popLayout">
-          {REALIZATIONS.map((item, i) => (
+          {realizations.map((item, i) => (
             <motion.div
               layout
               key={item.id}

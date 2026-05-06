@@ -43,7 +43,7 @@ export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
                 {[
                   { icon: Phone, label: isEn ? 'Phone' : 'Téléphone', value: '+237 695 42 59 70', sub: '+237 222 462 523', color: 'bg-merlin-red' },
                   { icon: Mail, label: 'Email', value: 'merlincameroun@gmail.com', sub: isEn ? 'Reply within 24h' : 'Réponse sous 24h', color: 'bg-merlin-green' },
-                  { icon: MapPin, label: isEn ? 'Location' : 'Localisation', value: 'Kribi, Cameroun', sub: isEn ? 'Head office' : 'Siège social', color: 'bg-merlin-black' },
+                  { icon: MapPin, label: isEn ? 'Location' : 'Localisation', value: isEn ? 'Kribi, Cameroon' : 'Kribi, Cameroun', sub: isEn ? 'Head office' : 'Siège social', color: 'bg-merlin-black' },
                   { 
                     isWhatsApp: true,
                     label: 'WhatsApp', 
@@ -122,7 +122,7 @@ export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
                       required
                       type="email"
                       className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green"
-                      placeholder="jean@example.com"
+                      placeholder={isEn ? 'john@example.com' : 'jean@example.com'}
                     />
                   </div>
                 </div>
