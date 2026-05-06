@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, Menu, Phone, ArrowRight } from 'lucide-react';
+import { Search, Menu, Phone, ArrowRight, Globe2 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
@@ -13,6 +13,47 @@ const FacebookIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
     <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
   </svg>
 );
+
+const LanguageSwitcher = ({
+  locale,
+  switchToFr,
+  switchToEn,
+}: {
+  locale: 'fr' | 'en';
+  switchToFr: string;
+  switchToEn: string;
+}) => {
+  const options = [
+    { code: 'fr', flag: '🇫🇷', href: switchToFr, label: 'Français' },
+    { code: 'en', flag: '🇬🇧', href: switchToEn, label: 'English' },
+  ] as const;
+
+  return (
+    <div className="flex items-center gap-1 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
+      <div className="hidden sm:flex h-8 w-8 items-center justify-center rounded-full bg-gray-50 text-gray-500">
+        <Globe2 className="h-4 w-4" />
+      </div>
+      {options.map((option) => {
+        const active = locale === option.code;
+        return (
+          <Link
+            key={option.code}
+            href={option.href}
+            title={option.label}
+            className={`inline-flex items-center gap-1.5 rounded-full px-2 py-1.5 text-[10px] font-black uppercase tracking-wider transition ${
+              active ? 'bg-merlin-red text-white shadow-sm' : 'text-gray-600 hover:bg-gray-50'
+            }`}
+          >
+            <span className="text-xs leading-none" aria-hidden="true">
+              {option.flag}
+            </span>
+            <span>{option.code.toUpperCase()}</span>
+          </Link>
+        );
+      })}
+    </div>
+  );
+};
 
 export const Header = () => {
   const pathname = usePathname();
@@ -47,20 +88,7 @@ export const Header = () => {
         </div>
 
 	        <div className="flex items-center gap-3">
-            <div className="flex items-center rounded-full border border-gray-200 overflow-hidden">
-              <Link
-                href={switchToFr}
-                className={`px-3 py-1.5 text-[10px] font-black tracking-widest ${locale === 'fr' ? 'bg-merlin-red text-white' : 'bg-white text-gray-500 hover:text-merlin-red'}`}
-              >
-                FR
-              </Link>
-              <Link
-                href={switchToEn}
-                className={`px-3 py-1.5 text-[10px] font-black tracking-widest ${locale === 'en' ? 'bg-merlin-red text-white' : 'bg-white text-gray-500 hover:text-merlin-red'}`}
-              >
-                EN
-              </Link>
-            </div>
+            <LanguageSwitcher locale={locale} switchToFr={switchToFr} switchToEn={switchToEn} />
 	          <a
 	            href="tel:+237695425970"
 	            className="hidden lg:flex items-center gap-2 text-merlin-black font-semibold text-sm hover:text-merlin-red transition-colors"
