@@ -114,30 +114,31 @@ export const Header = () => {
 
   return (
     <header className="bg-white border-b border-gray-100 py-3 px-4 sm:px-6 md:px-12 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <Link href={routes.home} className="shrink-0 flex items-center gap-2 sm:gap-3" aria-label={isEn ? 'Home' : 'Accueil'}>
-          <img
-            src="/images/logo.jpg"
-            alt={isEn ? 'Merlin Cameroon logo' : 'Logo Merlin Cameroun'}
-            className="h-12 w-auto sm:h-14 object-contain"
-          />
-          <div className="flex items-baseline gap-1 leading-none">
-            <span className="text-base sm:text-lg font-black font-outfit tracking-tight text-merlin-red">MERLIN</span>
-            <span className="text-base sm:text-lg font-black font-outfit tracking-tight text-merlin-red">CAMEROUN</span>
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between gap-3">
+          <Link href={routes.home} className="shrink-0 flex items-center gap-2 sm:gap-3 min-w-0" aria-label={isEn ? 'Home' : 'Accueil'}>
+            <img
+              src="/images/logo.jpg"
+              alt={isEn ? 'Merlin Cameroon logo' : 'Logo Merlin Cameroun'}
+              className="h-12 w-auto sm:h-14 object-contain"
+            />
+            <div className="flex items-baseline gap-1 leading-none min-w-0">
+              <span className="text-sm sm:text-lg font-black font-outfit tracking-tight text-merlin-red">MERLIN</span>
+              <span className="text-sm sm:text-lg font-black font-outfit tracking-tight text-merlin-red">CAMEROUN</span>
+            </div>
+          </Link>
+
+          <div className="hidden md:flex flex-1 max-w-xl relative">
+            <input
+              type="text"
+              placeholder={isEn ? 'Search for a product...' : 'Rechercher un produit...'}
+              className="w-full pl-10 pr-4 py-2 bg-merlin-gray rounded-full border-none focus:ring-2 focus:ring-merlin-green text-sm"
+            />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           </div>
-        </Link>
 
-        <div className="hidden md:flex flex-1 max-w-xl relative">
-          <input
-            type="text"
-            placeholder={isEn ? 'Search for a product...' : 'Rechercher un produit...'}
-            className="w-full pl-10 pr-4 py-2 bg-merlin-gray rounded-full border-none focus:ring-2 focus:ring-merlin-green text-sm"
-          />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-        </div>
-
-	        <div className="flex items-center gap-3">
-            <LanguageSwitcher locale={locale} switchToFr={switchToFr} switchToEn={switchToEn} />
+	        <div className="flex items-center gap-2 sm:gap-3">
+              <LanguageSwitcher locale={locale} switchToFr={switchToFr} switchToEn={switchToEn} />
 	          <a
 	            href="tel:+237695425970"
 	            className="hidden lg:flex items-center gap-2 text-merlin-black font-semibold text-sm hover:text-merlin-red transition-colors"
@@ -147,7 +148,7 @@ export const Header = () => {
 	          </a>
 	          <Link
 	            href={routes.contact}
-	            className="bg-merlin-red text-white px-3 sm:px-5 py-2 rounded-full font-bold text-[11px] sm:text-sm hover:bg-red-700 transition-colors shadow-lg shadow-red-500/20 whitespace-nowrap"
+	            className="hidden sm:inline-flex bg-merlin-red text-white px-3 sm:px-5 py-2 rounded-full font-bold text-[11px] sm:text-sm hover:bg-red-700 transition-colors shadow-lg shadow-red-500/20 whitespace-nowrap"
 	          >
 	            {isEn ? 'REQUEST A QUOTE' : 'DEMANDER UN DEVIS'}
 	          </Link>
@@ -155,7 +156,7 @@ export const Header = () => {
 	            href={COMPANY_INFO.facebookUrl}
 	            target="_blank"
 	            rel="noopener noreferrer"
-	            className="bg-[#1877F2] text-white w-10 h-10 sm:w-11 sm:h-11 rounded-full hover:bg-[#1666cf] transition-colors shadow-lg flex items-center justify-center"
+	            className="hidden sm:flex bg-[#1877F2] text-white w-10 h-10 sm:w-11 sm:h-11 rounded-full hover:bg-[#1666cf] transition-colors shadow-lg items-center justify-center"
               aria-label={isEn ? 'Official Facebook' : 'Facebook officiel'}
 	          >
 	            <FacebookIcon className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -163,7 +164,27 @@ export const Header = () => {
 	          </a>
 	        </div>
 	      </div>
-	    </header>
+
+        <div className="mt-3 grid grid-cols-2 gap-2 sm:hidden">
+          <Link
+            href={routes.contact}
+            className="inline-flex items-center justify-center rounded-full bg-merlin-red px-3 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg shadow-red-500/20"
+          >
+            {isEn ? 'QUOTE' : 'DEVIS'}
+          </Link>
+          <a
+            href={COMPANY_INFO.facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-full bg-[#1877F2] px-3 py-2 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg"
+            aria-label={isEn ? 'Official Facebook' : 'Facebook officiel'}
+          >
+            <FacebookIcon className="w-4 h-4" />
+            <span className="ml-2">{isEn ? 'Facebook' : 'Facebook'}</span>
+          </a>
+        </div>
+      </div>
+	  </header>
   );
 };
 
@@ -189,7 +210,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="bg-merlin-green text-white sticky top-[72px] md:top-[73px] z-40 shadow-md">
+    <nav className="bg-merlin-green text-white sticky top-[116px] sm:top-[72px] md:top-[73px] z-40 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center h-14 px-4 sm:px-6 md:px-12">
         <button
           className="flex items-center gap-2 bg-merlin-green h-full px-4 md:px-6 border-r border-white/10 hover:bg-green-700 transition-colors uppercase font-black text-[10px] md:text-xs tracking-[0.2em]"
