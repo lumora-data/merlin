@@ -23,6 +23,7 @@ const LanguageSwitcher = ({
   switchToFr: string;
   switchToEn: string;
 }) => {
+  const isEn = locale === 'en';
   const [open, setOpen] = React.useState(false);
   const wrapperRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -39,8 +40,8 @@ const LanguageSwitcher = ({
   }, []);
 
   const options = [
-    { code: 'fr', flag: '🇫🇷', href: switchToFr, label: 'Français' },
-    { code: 'en', flag: '🇬🇧', href: switchToEn, label: 'English' },
+    { code: 'fr', flag: '🇫🇷', href: switchToFr, label: isEn ? 'French' : 'Français' },
+    { code: 'en', flag: '🇬🇧', href: switchToEn, label: isEn ? 'English' : 'Anglais' },
   ] as const;
 
   const currentOption = options.find((option) => option.code === locale) ?? options[0];
@@ -51,7 +52,8 @@ const LanguageSwitcher = ({
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        aria-label="Sélection de langue"
+        aria-label={isEn ? 'Language selector' : 'Sélection de langue'}
+        title={isEn ? 'Choose language' : 'Choisir la langue'}
         className="inline-flex h-10 items-center gap-2 rounded-full border border-gray-200 bg-white px-3 pr-2 text-[10px] font-black uppercase tracking-wider text-gray-700 shadow-sm transition hover:border-merlin-red/40"
       >
         <span className="hidden sm:flex h-6 w-6 items-center justify-center rounded-full bg-gray-50 text-gray-500">
@@ -80,6 +82,7 @@ const LanguageSwitcher = ({
                   key={option.code}
                   href={option.href}
                   onClick={() => setOpen(false)}
+                  title={option.label}
                   className={`flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold transition ${
                     active ? 'bg-merlin-red/10 text-merlin-red' : 'text-gray-700 hover:bg-gray-50'
                   }`}
@@ -194,7 +197,7 @@ export const Navbar = () => {
           aria-label={isEn ? 'Open menu' : 'Ouvrir le menu'}
         >
           <Menu className="w-4 h-4" />
-          {isEn ? 'Catalogue' : 'Catalogue'}
+          {isEn ? 'Catalog' : 'Catalogue'}
         </button>
 
         <div className="hidden lg:flex flex-1 items-center justify-center h-full">
