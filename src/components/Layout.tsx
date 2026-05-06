@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, Menu, Phone, ArrowRight, Globe2 } from 'lucide-react';
+import { Search, Menu, Phone, ArrowRight, Globe2, ChevronDown, Check } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
@@ -23,34 +23,80 @@ const LanguageSwitcher = ({
   switchToFr: string;
   switchToEn: string;
 }) => {
+  const [open, setOpen] = React.useState(false);
+  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (!wrapperRef.current) return;
+      if (!wrapperRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
   const options = [
     { code: 'fr', flag: '🇫🇷', href: switchToFr, label: 'Français' },
     { code: 'en', flag: '🇬🇧', href: switchToEn, label: 'English' },
   ] as const;
 
+  const currentOption = options.find((option) => option.code === locale) ?? options[0];
+
   return (
-    <div className="flex items-center gap-1 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
-      <div className="hidden sm:flex h-8 w-8 items-center justify-center rounded-full bg-gray-50 text-gray-500">
-        <Globe2 className="h-4 w-4" />
-      </div>
-      {options.map((option) => {
-        const active = locale === option.code;
-        return (
-          <Link
-            key={option.code}
-            href={option.href}
-            title={option.label}
-            className={`inline-flex items-center gap-1.5 rounded-full px-2 py-1.5 text-[10px] font-black uppercase tracking-wider transition ${
-              active ? 'bg-merlin-red text-white shadow-sm' : 'text-gray-600 hover:bg-gray-50'
-            }`}
+    <div ref={wrapperRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-expanded={open}
+        aria-label="Sélection de langue"
+        className="inline-flex h-10 items-center gap-2 rounded-full border border-gray-200 bg-white px-3 pr-2 text-[10px] font-black uppercase tracking-wider text-gray-700 shadow-sm transition hover:border-merlin-red/40"
+      >
+        <span className="hidden sm:flex h-6 w-6 items-center justify-center rounded-full bg-gray-50 text-gray-500">
+          <Globe2 className="h-3.5 w-3.5" />
+        </span>
+        <span className="text-xs leading-none" aria-hidden="true">
+          {currentOption.flag}
+        </span>
+        <span>{currentOption.code.toUpperCase()}</span>
+        <ChevronDown className={`h-3.5 w-3.5 transition ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            initial={{ opacity: 0, y: 6, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.98 }}
+            transition={{ duration: 0.16 }}
+            className="absolute right-0 top-12 z-[60] min-w-[160px] overflow-hidden rounded-2xl border border-gray-200 bg-white p-1.5 shadow-2xl"
           >
-            <span className="text-xs leading-none" aria-hidden="true">
-              {option.flag}
-            </span>
-            <span>{option.code.toUpperCase()}</span>
-          </Link>
-        );
-      })}
+            {options.map((option) => {
+              const active = locale === option.code;
+              return (
+                <Link
+                  key={option.code}
+                  href={option.href}
+                  onClick={() => setOpen(false)}
+                  className={`flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold transition ${
+                    active ? 'bg-merlin-red/10 text-merlin-red' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <span className="text-sm leading-none" aria-hidden="true">
+                      {option.flag}
+                    </span>
+                    <span>{option.label}</span>
+                  </span>
+                  {active ? <Check className="h-3.5 w-3.5" /> : null}
+                </Link>
+              );
+            })}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 };
