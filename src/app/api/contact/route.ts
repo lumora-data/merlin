@@ -1,5 +1,8 @@
+import { randomUUID } from 'crypto';
 import { NextResponse } from 'next/server';
 import { getContactEnv } from '../../../lib/env/server';
+import { getContent, saveContent } from '../../../lib/content/store';
+import type { QuoteRequest } from '../../../lib/content/types';
 
 export const runtime = 'nodejs';
 
@@ -102,10 +105,43 @@ export async function POST(request: Request) {
   }
 
   const serviceLabel = serviceLabels[serviceValue]?.[locale] ?? serviceValue;
-  const submittedAt = new Date().toLocaleString('fr-FR', { timeZone: 'Africa/Douala' });
+  const submittedAtIso = new Date().toISOString();
+  const submittedAt = new Date(submittedAtIso).toLocaleString('fr-FR', { timeZone: 'Africa/Douala' });
   const subject = isEn
     ? `Website contact request - ${fullName}`
     : `Nouvelle demande de contact - ${fullName}`;
+
+  const quoteRequest: QuoteRequest = {
+    id: randomUUID(),
+    submittedAt: submittedAtIso,
+    fullName,
+    email,
+    phone,
+    service: serviceValue,
+    serviceLabel,
+    message,
+    locale,
+  };
+
+  try {
+    const currentQuotes = await getContent('quotes');
+    await saveContent({
+      type: 'quotes',
+      value: [quoteRequest, ...currentQuotes],
+      commitMessage: `cms(quotes): create ${quoteRequest.id}`,
+    });
+  } catch (error) {
+    const detail = error instanceof Error ? error.message.slice(0, 200) : '';
+    return NextResponse.json(
+      {
+        ok: false,
+        error: isEn
+          ? `Request could not be saved right now.${detail ? ` ${detail}` : ''}`
+          : `Impossible d'enregistrer la demande pour le moment.${detail ? ` ${detail}` : ''}`,
+      },
+      { status: 500 },
+    );
+  }
 
   const textContent = [
     isEn ? 'New message from merlincameroun.com contact form' : 'Nouveau message depuis le formulaire de contact merlincameroun.com',

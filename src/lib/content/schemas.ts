@@ -1,4 +1,4 @@
-import type { ContentMap, HeroSlide } from './types';
+import type { ContentMap, HeroSlide, QuoteRequest } from './types';
 import type { Agency, ProductFamily, Service, ServiceIcon } from '../../types';
 
 function assert(condition: unknown, message: string): asserts condition {
@@ -137,6 +137,38 @@ export const validateAgencies = (input: unknown): Agency[] => {
   return agencies;
 };
 
+export const validateQuotes = (input: unknown): QuoteRequest[] => {
+  assert(Array.isArray(input), 'Quotes must be an array');
+  const quotes = input.map((item, index) => {
+    assert(item && typeof item === 'object', `Quote ${index + 1} must be an object`);
+    const typed = item as QuoteRequest;
+    assert(isNonEmptyString(typed.id), `Quote ${index + 1}: id is required`);
+    assert(isNonEmptyString(typed.submittedAt), `Quote ${index + 1}: submittedAt is required`);
+    assert(isNonEmptyString(typed.fullName), `Quote ${index + 1}: fullName is required`);
+    assert(isNonEmptyString(typed.email), `Quote ${index + 1}: email is required`);
+    assert(isNonEmptyString(typed.phone), `Quote ${index + 1}: phone is required`);
+    assert(isNonEmptyString(typed.service), `Quote ${index + 1}: service is required`);
+    assert(isNonEmptyString(typed.serviceLabel), `Quote ${index + 1}: serviceLabel is required`);
+    assert(isNonEmptyString(typed.message), `Quote ${index + 1}: message is required`);
+    assert(typed.locale === 'fr' || typed.locale === 'en', `Quote ${index + 1}: locale must be fr or en`);
+
+    return {
+      id: typed.id.trim(),
+      submittedAt: typed.submittedAt.trim(),
+      fullName: typed.fullName.trim(),
+      email: typed.email.trim().toLowerCase(),
+      phone: typed.phone.trim(),
+      service: typed.service.trim(),
+      serviceLabel: typed.serviceLabel.trim(),
+      message: typed.message.trim(),
+      locale: typed.locale,
+    };
+  });
+
+  ensureUniqueIds(quotes, 'Quotes');
+  return quotes.sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
+};
+
 export const contentValidators: {
   [K in keyof ContentMap]: (value: unknown) => ContentMap[K];
 } = {
@@ -144,4 +176,5 @@ export const contentValidators: {
   services: validateServices,
   products: validateProducts,
   agencies: validateAgencies,
+  quotes: validateQuotes,
 };

@@ -25,6 +25,11 @@ const cards = [
     title: 'Agences',
     text: 'Mettre à jour les agences, contacts et localisations.',
   },
+  {
+    href: '/admin/quotes',
+    title: 'Demandes de devis',
+    text: 'Voir toutes les demandes reçues depuis le formulaire et exporter en CSV.',
+  },
 ];
 
 export default async function AdminDashboardPage() {

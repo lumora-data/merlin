@@ -10,6 +10,7 @@ const links = [
   { href: '/admin/services', label: 'Services' },
   { href: '/admin/products', label: 'Produits' },
   { href: '/admin/agencies', label: 'Agences' },
+  { href: '/admin/quotes', label: 'Demandes de devis' },
 ];
 
 export const AdminShell = ({ children, title, subtitle }: { children: React.ReactNode; title: string; subtitle?: string }) => {

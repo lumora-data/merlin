@@ -14,7 +14,7 @@ const LoginContent = () => (
     <div className="w-full rounded-3xl bg-white p-6 shadow-2xl ring-1 ring-slate-100 sm:p-8">
       <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-600">Espace admin</p>
       <h1 className="mt-2 text-2xl font-black text-slate-900">Connexion</h1>
-      <p className="mb-6 mt-1 text-sm text-slate-500">Connectez-vous pour gérer le hero slider, les services, les produits et les agences.</p>
+      <p className="mb-6 mt-1 text-sm text-slate-500">Connectez-vous pour gérer le hero slider, les services, les produits, les agences et les demandes de devis.</p>
       <LoginForm />
     </div>
   </div>

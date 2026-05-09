@@ -31,6 +31,11 @@ export const CONTENT_REGISTRY: {
     filePath: path.join(process.cwd(), 'content', 'agencies.json'),
     validate: contentValidators.agencies,
   },
+  quotes: {
+    type: 'quotes',
+    filePath: path.join(process.cwd(), 'content', 'quotes.json'),
+    validate: contentValidators.quotes,
+  },
 };
 
 export const isContentType = (type: string): type is ContentType =>
