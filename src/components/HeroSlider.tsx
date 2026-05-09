@@ -8,7 +8,7 @@ import { PRODUCT_FAMILIES } from '../constants';
 import type { Locale } from '../lib/i18n';
 import { ROUTES } from '../lib/i18n';
 import { localizeProductFamilies } from '../lib/localized-content';
-import heroData from '../../content/hero.json';
+import type { HeroSlide as HeroSlideContent } from '../lib/content/types';
 
 type Slide = {
   id: string;
@@ -16,40 +16,85 @@ type Slide = {
   alt: string;
 };
 
-const heroSlides: Slide[] = (heroData as Slide[]).map((slide) => ({
+const normalizeSlide = (slide: HeroSlideContent): Slide => ({
   ...slide,
   image: encodeURI(slide.image),
-}));
+});
 
 export const HeroSlider = ({ locale = 'fr' }: { locale?: Locale }) => {
   const isEn = locale === 'en';
   const routes = ROUTES[locale];
   const localizedFamilies = localizeProductFamilies(PRODUCT_FAMILIES, locale);
-
-  const productSlides: Slide[] = localizedFamilies.flatMap((family) =>
-    family.images.map((image, index) => ({
-      id: `product-${family.slug}-${index}`,
-      image,
-      alt: family.title,
-    })),
-  );
-
-  const slides: Slide[] = [...heroSlides, ...productSlides];
+  const [heroSlides, setHeroSlides] = React.useState<Slide[]>([]);
   const [current, setCurrent] = React.useState(0);
 
-  const next = () => setCurrent((prev) => (prev + 1) % slides.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  React.useEffect(() => {
+    let cancelled = false;
+
+    const loadHeroSlides = async () => {
+      try {
+        const response = await fetch('/api/content/hero', { cache: 'no-store' });
+        const payload = (await response.json()) as { ok: boolean; items?: HeroSlideContent[] };
+        if (!response.ok || !payload.ok || !Array.isArray(payload.items)) return;
+        if (cancelled) return;
+        setHeroSlides(payload.items.map(normalizeSlide));
+      } catch {
+        // Keep existing slides if fetch fails.
+      }
+    };
+
+    loadHeroSlides();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const productSlides: Slide[] = React.useMemo(
+    () =>
+      localizedFamilies.flatMap((family) =>
+        family.images.map((image, index) => ({
+          id: `product-${family.slug}-${index}`,
+          image,
+          alt: family.title,
+        })),
+      ),
+    [localizedFamilies],
+  );
+
+  const slides: Slide[] = React.useMemo(() => [...heroSlides, ...productSlides], [heroSlides, productSlides]);
+  const slidesCount = slides.length;
 
   React.useEffect(() => {
+    if (slidesCount === 0) return;
+    if (current >= slidesCount) {
+      setCurrent(0);
+    }
+  }, [current, slidesCount]);
+
+  const next = () => {
+    if (slidesCount <= 1) return;
+    setCurrent((prev) => (prev + 1) % slidesCount);
+  };
+  const prev = () => {
+    if (slidesCount <= 1) return;
+    setCurrent((prev) => (prev - 1 + slidesCount) % slidesCount);
+  };
+
+  React.useEffect(() => {
+    if (slidesCount <= 1) return;
     const timer = setInterval(next, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slidesCount]);
+
+  if (slidesCount === 0) {
+    return null;
+  }
 
   const getVisibleIndices = () => {
     return [
-      current % slides.length,
-      (current + 1) % slides.length,
-      (current + 2) % slides.length,
+      current % slidesCount,
+      (current + 1) % slidesCount,
+      (current + 2) % slidesCount,
     ];
   };
 
