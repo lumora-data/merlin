@@ -141,37 +141,58 @@ export const QuotesEditor = () => {
         </div>
       </div>
 
-      <div className="space-y-3 md:hidden">
-        {items.length === 0 ? (
-          <div className="rounded-2xl border border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">
-            Aucune demande pour le moment.
-          </div>
-        ) : (
-          items.map((item) => (
-            <article key={item.id} className="rounded-2xl border border-slate-200 bg-white p-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{formatDate(item.submittedAt)}</p>
-              <h3 className="mt-1 text-base font-black text-slate-900">{item.fullName}</h3>
-              <div className="mt-3 space-y-1 text-sm text-slate-700">
-                <p><span className="font-semibold">Email:</span> {item.email}</p>
-                <p><span className="font-semibold">Téléphone:</span> {item.phone}</p>
-                <p><span className="font-semibold">Service:</span> {item.serviceLabel}</p>
-                <p><span className="font-semibold">Langue:</span> {item.locale.toUpperCase()}</p>
-              </div>
-              <div className="mt-3 rounded-xl bg-slate-50 p-3">
-                <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Message</p>
-                <p className="mt-1 whitespace-pre-wrap text-sm text-slate-700">{item.message}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => removeOne(item.id)}
-                disabled={saving}
-                className="mt-4 w-full rounded-xl bg-red-50 px-3 py-2 text-sm font-bold text-red-700 hover:bg-red-100 disabled:opacity-50"
-              >
-                Supprimer
-              </button>
-            </article>
-          ))
-        )}
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white md:hidden">
+        <table className="min-w-full text-sm">
+          <thead className="bg-slate-100 text-left text-xs uppercase tracking-wide text-slate-600">
+            <tr>
+              <th className="px-3 py-3">Demandes</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {items.length === 0 ? (
+              <tr>
+                <td className="px-3 py-8 text-center text-sm text-slate-500">Aucune demande pour le moment.</td>
+              </tr>
+            ) : (
+              items.map((item) => (
+                <tr key={item.id} className="align-top">
+                  <td className="px-3 py-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <p className="truncate text-base font-black text-slate-900">{item.fullName}</p>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{formatDate(item.submittedAt)}</p>
+                      </div>
+                      <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-bold uppercase text-slate-600">{item.locale.toUpperCase()}</span>
+                    </div>
+
+                    <div className="mt-3 grid grid-cols-[80px_1fr] gap-x-2 gap-y-1 text-xs text-slate-700">
+                      <span className="font-bold text-slate-500">Email</span>
+                      <span className="break-all">{item.email}</span>
+                      <span className="font-bold text-slate-500">Téléphone</span>
+                      <span>{item.phone}</span>
+                      <span className="font-bold text-slate-500">Service</span>
+                      <span>{item.serviceLabel}</span>
+                    </div>
+
+                    <div className="mt-3 rounded-xl bg-slate-50 p-3">
+                      <p className="text-[10px] font-bold uppercase tracking-wide text-slate-500">Message</p>
+                      <p className="mt-1 whitespace-pre-wrap text-sm text-slate-700">{item.message}</p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => removeOne(item.id)}
+                      disabled={saving}
+                      className="mt-3 w-full rounded-xl bg-red-50 px-3 py-2 text-sm font-bold text-red-700 hover:bg-red-100 disabled:opacity-50"
+                    >
+                      Supprimer
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
 
       <div className="hidden overflow-x-auto rounded-2xl border border-slate-200 md:block">
