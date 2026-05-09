@@ -4,28 +4,42 @@
     "slug": "carrelage-revetements",
     "title": "Carrelage et revêtements",
     "description": "Vente de carrelage de haute qualité à Kribi. Découvrez notre sélection pour sols et murs, intérieur comme extérieur.",
-    "images": ["/images/produits/Carrelage et revêtements/image-03.webp"]
+    "images": [
+      "/images/produits/Carrelage et revêtements/image-03.webp",
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778334251/merlin-cms/o82nok6p54rx1zzpvk0x.jpg",
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778334280/merlin-cms/mkvki5zcyndhc08kpowv.jpg",
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778334355/merlin-cms/juuzwntv3ofdmcrypxxk.jpg",
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778334382/merlin-cms/nhuvnogltozn6ml9j942.jpg",
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778334423/merlin-cms/gspysvsfinoi3dxke2gu.jpg",
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778334488/merlin-cms/jmubidxa46y2ktpyt1ie.jpg"
+    ]
   },
   {
     "id": "2",
     "slug": "sanitaires",
     "title": "Sanitaires",
     "description": "Aménagez votre salle de bain avec des équipements sanitaires fiables et durables pour vos projets résidentiels et professionnels.",
-    "images": ["/images/produits/sanitaires/PHOTO-2026-05-04-16-55-18.jpg"]
+    "images": [
+      "/images/produits/sanitaires/PHOTO-2026-05-04-16-55-18.jpg"
+    ]
   },
   {
     "id": "3",
     "slug": "peinture-accessoires",
     "title": "Peinture et accessoires",
     "description": "Peinture acrylique, enduits et accessoires pour des finitions propres et résistantes, en intérieur comme en extérieur.",
-    "images": ["/images/produits/peinture et accessoires/PHOTO-2026-05-04-16-35-46.jpg"]
+    "images": [
+      "/images/produits/peinture et accessoires/PHOTO-2026-05-04-16-35-46.jpg"
+    ]
   },
   {
     "id": "4",
     "slug": "ciment",
     "title": "Ciment",
     "description": "Ciment de haute performance pour gros œuvre, fondations, poteaux et dalles avec une excellente tenue mécanique.",
-    "images": ["/images/produits/ciment/PHOTO-2026-05-04-16-32-32.jpg"]
+    "images": [
+      "/images/produits/ciment/PHOTO-2026-05-04-16-32-32.jpg"
+    ]
   },
   {
     "id": "5",
@@ -42,7 +56,9 @@
     "slug": "outillages",
     "title": "Outillages",
     "description": "Outillages professionnels et électroportatifs: marteaux, perceuses, meuleuses et accessoires pour chantiers.",
-    "images": ["/images/produits/outillages (marteaux, tournevis, meuleuses, perceuses...)/PHOTO-2026-05-04-13-48-07.jpg"]
+    "images": [
+      "/images/produits/outillages (marteaux, tournevis, meuleuses, perceuses...)/PHOTO-2026-05-04-13-48-07.jpg"
+    ]
   },
   {
     "id": "7",
@@ -71,7 +87,9 @@
     "slug": "cuisine-electromenager",
     "title": "Cuisine et électroménager",
     "description": "Équipements de cuisine et électroménagers modernes pour particuliers, commerces et espaces professionnels.",
-    "images": ["/images/produits/cuisine et électroménager/PHOTO-2026-05-04-16-59-52.jpg"]
+    "images": [
+      "/images/produits/cuisine et électroménager/PHOTO-2026-05-04-16-59-52.jpg"
+    ]
   },
   {
     "id": "10",
@@ -90,14 +108,18 @@
     "slug": "pompes-hydraulique",
     "title": "Pompes et équipements hydrauliques",
     "description": "Pompes immergées, surpresseurs et équipements hydrauliques pour l’alimentation, le relevage et l’irrigation.",
-    "images": ["/images/produits/pompes et équipements hydrauliques/PHOTO-2026-05-04-17-17-31.jpg"]
+    "images": [
+      "/images/produits/pompes et équipements hydrauliques/PHOTO-2026-05-04-17-17-31.jpg"
+    ]
   },
   {
     "id": "12",
     "slug": "stockage-reservoirs",
     "title": "Stockage et réservoirs",
     "description": "Réservoirs et solutions de stockage pour l’eau et les liquides, adaptés aux besoins domestiques et professionnels.",
-    "images": ["/images/produits/Stockage et réservoirs(cubitenaires, futs)/PHOTO-2026-05-04-16-42-14.jpg"]
+    "images": [
+      "/images/produits/Stockage et réservoirs(cubitenaires, futs)/PHOTO-2026-05-04-16-42-14.jpg"
+    ]
   },
   {
     "id": "13",
@@ -114,13 +136,17 @@
     "slug": "couverture-toiture",
     "title": "Couverture et toiture",
     "description": "Tôles, faîtières et accessoires de toiture pour une couverture solide, durable et adaptée au climat local.",
-    "images": ["/images/produits/couverture et toiture( tôles, faîtières, bandes ourlées...)/PHOTO-2026-05-04-16-37-04.jpg"]
+    "images": [
+      "/images/produits/couverture et toiture( tôles, faîtières, bandes ourlées...)/PHOTO-2026-05-04-16-37-04.jpg"
+    ]
   },
   {
     "id": "15",
     "slug": "menuiserie",
     "title": "Menuiserie",
     "description": "Contreplaqués, panneaux et accessoires pour la menuiserie, l’agencement et les travaux de finition bois.",
-    "images": ["/images/produits/menuiserie ( contreplaqués, panneaux, équerres, fond d'huile, imprebois...)/PHOTO-2026-05-04-16-58-46.jpg"]
+    "images": [
+      "/images/produits/menuiserie ( contreplaqués, panneaux, équerres, fond d'huile, imprebois...)/PHOTO-2026-05-04-16-58-46.jpg"
+    ]
   }
 ]
