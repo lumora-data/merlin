@@ -5,14 +5,81 @@ import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
 import type { Locale } from '../lib/i18n';
 
+type FormStatus = 'idle' | 'sending' | 'success' | 'error';
+
+type ContactFormState = {
+  fullName: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+  website: string;
+};
+
+const initialFormState: ContactFormState = {
+  fullName: '',
+  email: '',
+  phone: '',
+  service: 'construction',
+  message: '',
+  website: '',
+};
+
+const serviceOptions = [
+  { value: 'construction', fr: 'Construction', en: 'Construction' },
+  { value: 'logistics_transport', fr: 'Logistique & Transport', en: 'Logistics & Transport' },
+  { value: 'general_trading', fr: 'Commerce Général', en: 'General Trading' },
+  { value: 'trading', fr: 'Négoce', en: 'Trading' },
+  { value: 'other', fr: 'Autre', en: 'Other' },
+] as const;
+
 export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
   const isEn = locale === 'en';
-  const [status, setStatus] = React.useState<'idle' | 'sending' | 'success'>('idle');
+  const [status, setStatus] = React.useState<FormStatus>('idle');
+  const [errorMessage, setErrorMessage] = React.useState('');
+  const [formData, setFormData] = React.useState<ContactFormState>(initialFormState);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFieldChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    const field = e.target.name as keyof ContactFormState;
+    setFormData((prev) => ({
+      ...prev,
+      [field]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('sending');
-    setTimeout(() => setStatus('success'), 1500);
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          locale,
+        }),
+      });
+
+      const payload = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+
+      if (!response.ok || !payload?.ok) {
+        throw new Error(payload?.error ?? (isEn ? 'Unable to send message right now.' : "Impossible d'envoyer le message pour le moment."));
+      }
+
+      setStatus('success');
+      setFormData(initialFormState);
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage(
+        error instanceof Error ? error.message : isEn ? 'Unable to send message right now.' : "Impossible d'envoyer le message pour le moment.",
+      );
+    }
   };
 
   return (
@@ -105,12 +172,22 @@ export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <h3 className="text-2xl font-black uppercase tracking-tight mb-8">{isEn ? 'REQUEST A' : 'DEMANDER UN'} <span className="text-merlin-green">{isEn ? 'QUOTE' : 'DEVIS'}</span></h3>
+                {status === 'error' ? (
+                  <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+                    {errorMessage || (isEn ? 'Unable to send message right now.' : "Impossible d'envoyer le message pour le moment.")}
+                  </div>
+                ) : null}
+
+                <input type="text" name="website" value={formData.website} onChange={handleFieldChange} className="hidden" tabIndex={-1} autoComplete="off" />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{isEn ? 'Full name' : 'Nom Complet'}</label>
                     <input
                       required
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleFieldChange}
                       type="text"
                       className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green"
                       placeholder={isEn ? 'John Doe' : 'Jean Dupont'}
@@ -120,6 +197,9 @@ export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
                     <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Email</label>
                     <input
                       required
+                      name="email"
+                      value={formData.email}
+                      onChange={handleFieldChange}
                       type="email"
                       className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green"
                       placeholder={isEn ? 'john@example.com' : 'jean@example.com'}
@@ -132,6 +212,9 @@ export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
                     <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{isEn ? 'Phone' : 'Téléphone'}</label>
                     <input
                       required
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleFieldChange}
                       type="tel"
                       className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green"
                       placeholder="+237 6..."
@@ -140,13 +223,16 @@ export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{isEn ? 'Requested service' : 'Service Demandé'}</label>
                     <select
+                      name="service"
+                      value={formData.service}
+                      onChange={handleFieldChange}
                       className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green appearance-none font-medium"
                     >
-                      <option>{isEn ? 'Construction' : 'Construction'}</option>
-                      <option>{isEn ? 'Logistics & Transport' : 'Logistique & Transport'}</option>
-                      <option>{isEn ? 'General Trading' : 'Commerce Général'}</option>
-                      <option>{isEn ? 'Trading' : 'Négoce'}</option>
-                      <option>{isEn ? 'Other' : 'Autre'}</option>
+                      {serviceOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {isEn ? option.en : option.fr}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -155,6 +241,9 @@ export const ContactPage = ({ locale = 'fr' }: { locale?: Locale }) => {
                   <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{isEn ? 'Your message' : 'Votre Message'}</label>
                   <textarea
                     required
+                    name="message"
+                    value={formData.message}
+                    onChange={handleFieldChange}
                     rows={5}
                     className="w-full bg-merlin-gray border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-merlin-green resize-none"
                     placeholder={isEn ? 'Describe your needs here...' : 'Détaillez votre besoin ici...'}

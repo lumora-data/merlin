@@ -65,3 +65,10 @@ export const getMediaEnv = () => {
     },
   };
 };
+
+export const getContactEnv = () => ({
+  brevoApiKey: readEnv('BREVO_API_KEY') ?? readEnv('BREVO_TRANSACTIONAL_API_KEY'),
+  fromEmail: readEnv('BREVO_FROM_EMAIL') ?? 'noreply@merlincameroun.com',
+  fromName: readEnv('BREVO_FROM_NAME') ?? 'MERLIN Cameroun',
+  toEmail: readEnv('CONTACT_TO_EMAIL') ?? 'camerounmerin@gmail.com',
+});
