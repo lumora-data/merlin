@@ -111,15 +111,41 @@ export const AgenciesEditor = () => {
         <button onClick={createNew} className="w-full rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700">
           + Nouvelle agence
         </button>
-        {items.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => selectItem(item.id)}
-            className={`w-full rounded-xl border px-3 py-3 text-left text-sm font-semibold ${selectedId === item.id ? 'border-emerald-600 bg-emerald-50 text-emerald-700' : 'border-slate-200 text-slate-700 hover:bg-slate-50'}`}
+        <p className="rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-500">Créez une agence ou sélectionnez une agence existante pour la modifier.</p>
+
+        <div className="lg:hidden">
+          <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">Choisir une agence</label>
+          <select
+            value={selectedId ?? ''}
+            onChange={(event) => {
+              if (!event.target.value) {
+                createNew();
+                return;
+              }
+              selectItem(event.target.value);
+            }}
+            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 outline-none ring-emerald-500 focus:ring-2"
           >
-            {item.name}
-          </button>
-        ))}
+            <option value="">Nouvelle agence</option>
+            {items.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="hidden space-y-2 lg:block">
+          {items.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => selectItem(item.id)}
+              className={`w-full rounded-xl border px-3 py-3 text-left text-sm font-semibold ${selectedId === item.id ? 'border-emerald-600 bg-emerald-50 text-emerald-700' : 'border-slate-200 text-slate-700 hover:bg-slate-50'}`}
+            >
+              {item.name}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="space-y-4">
@@ -170,12 +196,12 @@ export const AgenciesEditor = () => {
           />
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          <button onClick={save} disabled={saving} className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700 disabled:opacity-60">
+        <div className="grid gap-3 sm:flex sm:flex-wrap">
+          <button onClick={save} disabled={saving} className="w-full rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700 disabled:opacity-60 sm:w-auto">
             {saving ? 'Sauvegarde...' : selectedId ? 'Mettre à jour' : 'Créer'}
           </button>
           {selectedId ? (
-            <button onClick={remove} disabled={saving} className="rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:opacity-60">
+            <button onClick={remove} disabled={saving} className="w-full rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:opacity-60 sm:w-auto">
               Supprimer
             </button>
           ) : null}

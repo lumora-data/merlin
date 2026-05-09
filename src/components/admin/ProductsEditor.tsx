@@ -125,15 +125,41 @@ export const ProductsEditor = () => {
         <button onClick={createNew} className="w-full rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700">
           + Nouveau produit
         </button>
-        {items.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => selectItem(item.id)}
-            className={`w-full rounded-xl border px-3 py-3 text-left text-sm font-semibold ${selectedId === item.id ? 'border-emerald-600 bg-emerald-50 text-emerald-700' : 'border-slate-200 text-slate-700 hover:bg-slate-50'}`}
+        <p className="rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-500">Créez un produit ou sélectionnez un produit existant pour le modifier.</p>
+
+        <div className="lg:hidden">
+          <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">Choisir un produit</label>
+          <select
+            value={selectedId ?? ''}
+            onChange={(event) => {
+              if (!event.target.value) {
+                createNew();
+                return;
+              }
+              selectItem(event.target.value);
+            }}
+            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 outline-none ring-emerald-500 focus:ring-2"
           >
-            {item.title}
-          </button>
-        ))}
+            <option value="">Nouveau produit</option>
+            {items.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.title}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="hidden space-y-2 lg:block">
+          {items.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => selectItem(item.id)}
+              className={`w-full rounded-xl border px-3 py-3 text-left text-sm font-semibold ${selectedId === item.id ? 'border-emerald-600 bg-emerald-50 text-emerald-700' : 'border-slate-200 text-slate-700 hover:bg-slate-50'}`}
+            >
+              {item.title}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="space-y-4">
@@ -167,7 +193,7 @@ export const ProductsEditor = () => {
         </div>
 
         <UploadImageField label="Ajouter une image" value={imageInput} onChange={setImageInput} />
-        <button onClick={addImage} type="button" className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700">
+        <button onClick={addImage} type="button" className="w-full rounded-xl bg-slate-900 px-4 py-2 text-sm font-bold text-white hover:bg-slate-700 sm:w-auto">
           Ajouter cette image à la galerie
         </button>
 
@@ -186,12 +212,12 @@ export const ProductsEditor = () => {
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          <button onClick={save} disabled={saving} className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700 disabled:opacity-60">
+        <div className="grid gap-3 sm:flex sm:flex-wrap">
+          <button onClick={save} disabled={saving} className="w-full rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700 disabled:opacity-60 sm:w-auto">
             {saving ? 'Sauvegarde...' : selectedId ? 'Mettre à jour' : 'Créer'}
           </button>
           {selectedId ? (
-            <button onClick={remove} disabled={saving} className="rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:opacity-60">
+            <button onClick={remove} disabled={saving} className="w-full rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:opacity-60 sm:w-auto">
               Supprimer
             </button>
           ) : null}

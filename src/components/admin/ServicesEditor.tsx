@@ -153,27 +153,52 @@ export const ServicesEditor = () => {
         <button onClick={createNew} className="w-full rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700">
           + Nouveau service
         </button>
-        <p className="rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-500">Sélectionnez un service à gauche ou créez-en un nouveau en 3 étapes.</p>
-        {items.map((item) => {
-          const Icon = ICON_MAP[item.icon] ?? Settings;
-          return (
-            <button
-              key={item.id}
-              onClick={() => selectItem(item.id)}
-              className={`w-full rounded-xl border px-3 py-3 text-left text-sm ${selectedId === item.id ? 'border-emerald-600 bg-emerald-50 text-emerald-800' : 'border-slate-200 text-slate-700 hover:bg-slate-50'}`}
-            >
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 rounded-lg bg-white p-2 shadow-sm">
-                  <Icon className="h-4 w-4" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block truncate font-bold">{item.title}</span>
-                  <span className="block text-xs text-slate-500">{CATEGORY_MAP[item.category].label}</span>
-                </span>
-              </div>
-            </button>
-          );
-        })}
+        <p className="rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-500">Créez un service ou sélectionnez un service existant pour le modifier.</p>
+
+        <div className="lg:hidden">
+          <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">Choisir un service</label>
+          <select
+            value={selectedId ?? ''}
+            onChange={(event) => {
+              if (!event.target.value) {
+                createNew();
+                return;
+              }
+              selectItem(event.target.value);
+            }}
+            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 outline-none ring-emerald-500 focus:ring-2"
+          >
+            <option value="">Nouveau service</option>
+            {items.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.title}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="hidden space-y-2 lg:block">
+          {items.map((item) => {
+            const Icon = ICON_MAP[item.icon] ?? Settings;
+            return (
+              <button
+                key={item.id}
+                onClick={() => selectItem(item.id)}
+                className={`w-full rounded-xl border px-3 py-3 text-left text-sm ${selectedId === item.id ? 'border-emerald-600 bg-emerald-50 text-emerald-800' : 'border-slate-200 text-slate-700 hover:bg-slate-50'}`}
+              >
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 rounded-lg bg-white p-2 shadow-sm">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate font-bold">{item.title}</span>
+                    <span className="block text-xs text-slate-500">{CATEGORY_MAP[item.category].label}</span>
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <div className="space-y-5">
@@ -243,12 +268,12 @@ export const ServicesEditor = () => {
           />
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          <button onClick={save} disabled={saving} className="rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700 disabled:opacity-60">
+        <div className="grid gap-3 sm:flex sm:flex-wrap">
+          <button onClick={save} disabled={saving} className="w-full rounded-xl bg-emerald-600 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-700 disabled:opacity-60 sm:w-auto">
             {saving ? 'Sauvegarde...' : selectedId ? 'Mettre à jour' : 'Créer'}
           </button>
           {selectedId ? (
-            <button onClick={remove} disabled={saving} className="rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:opacity-60">
+            <button onClick={remove} disabled={saving} className="w-full rounded-xl bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:opacity-60 sm:w-auto">
               Supprimer
             </button>
           ) : null}

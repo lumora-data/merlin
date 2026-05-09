@@ -17,6 +17,12 @@ export const AdminShell = ({ children, title, subtitle }: { children: React.Reac
   const pathname = usePathname();
   const router = useRouter();
   const [loggingOut, setLoggingOut] = React.useState(false);
+  const activeLink =
+    links.find((link) => pathname === link.href) ??
+    links
+      .filter((link) => link.href !== '/admin')
+      .find((link) => pathname.startsWith(link.href)) ??
+    links[0];
 
   const handleLogout = async () => {
     try {
@@ -46,11 +52,31 @@ export const AdminShell = ({ children, title, subtitle }: { children: React.Reac
           </button>
         </div>
 
+        <div className="mb-4 rounded-2xl bg-white p-3 shadow-sm lg:hidden">
+          <label htmlFor="admin-mobile-nav" className="mb-1 block text-xs font-black uppercase tracking-wider text-slate-500">
+            Navigation admin
+          </label>
+          <select
+            id="admin-mobile-nav"
+            value={activeLink.href}
+            onChange={(event) => router.push(event.target.value)}
+            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 outline-none ring-emerald-500 focus:ring-2"
+          >
+            {links.map((link) => (
+              <option key={link.href} value={link.href}>
+                {link.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
-          <aside className="h-fit rounded-2xl bg-white p-3 shadow-sm sm:rounded-3xl sm:p-4">
+          <aside className="hidden h-fit rounded-2xl bg-white p-3 shadow-sm sm:rounded-3xl sm:p-4 lg:block">
             <nav className="flex gap-2 overflow-x-auto pb-1 lg:block lg:space-y-2 lg:overflow-visible lg:pb-0">
               {links.map((link) => {
-                const active = pathname === link.href;
+                const active =
+                  pathname === link.href ||
+                  (link.href !== '/admin' && pathname.startsWith(`${link.href}/`));
                 return (
                   <Link
                     key={link.href}
