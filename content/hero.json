@@ -1,10 +1,47 @@
 [
-  { "id": "hero-1", "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-13-48-06.jpg", "alt": "Hero Merlin 1" },
-  { "id": "hero-2", "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-42-55.jpg", "alt": "Hero Merlin 2" },
-  { "id": "hero-3", "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-47-38.jpg", "alt": "Hero Merlin 3" },
-  { "id": "hero-4", "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-50-18.jpg", "alt": "Hero Merlin 4" },
-  { "id": "hero-5", "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-51-06.jpg", "alt": "Hero Merlin 5" },
-  { "id": "hero-6", "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-41-51 2.jpg", "alt": "Hero Merlin 6" },
-  { "id": "hero-7", "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-41-51.jpg", "alt": "Hero Merlin 7" },
-  { "id": "hero-8", "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-44-46.jpg", "alt": "Hero Merlin 8" }
+  {
+    "id": "hero-1",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-13-48-06.jpg",
+    "alt": "Hero Merlin 1"
+  },
+  {
+    "id": "hero-2",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-42-55.jpg",
+    "alt": "Hero Merlin 2"
+  },
+  {
+    "id": "hero-3",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-47-38.jpg",
+    "alt": "Hero Merlin 3"
+  },
+  {
+    "id": "hero-4",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-50-18.jpg",
+    "alt": "Hero Merlin 4"
+  },
+  {
+    "id": "hero-5",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-04-16-51-06.jpg",
+    "alt": "Hero Merlin 5"
+  },
+  {
+    "id": "hero-6",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-41-51 2.jpg",
+    "alt": "Hero Merlin 6"
+  },
+  {
+    "id": "hero-7",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-41-51.jpg",
+    "alt": "Hero Merlin 7"
+  },
+  {
+    "id": "hero-8",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-05-05-09-44-46.jpg",
+    "alt": "Hero Merlin 8"
+  },
+  {
+    "id": "bf9c10c7-b351-489e-88b7-4635183f335b",
+    "image": "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778332796/merlin-cms/jwjwwarxmk7jgvawip4r.png",
+    "alt": "Présentoir de carreaux"
+  }
 ]
