@@ -109,12 +109,12 @@ export const QuotesEditor = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-slate-50 p-4">
+      <div className="flex flex-col gap-3 rounded-2xl bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm font-bold text-slate-900">{items.length} demande(s) enregistrée(s)</p>
           <p className="text-xs text-slate-500">Les nouvelles demandes arrivent automatiquement depuis le formulaire Contact.</p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap">
           <button
             type="button"
             onClick={load}
@@ -141,7 +141,40 @@ export const QuotesEditor = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-slate-200">
+      <div className="space-y-3 md:hidden">
+        {items.length === 0 ? (
+          <div className="rounded-2xl border border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">
+            Aucune demande pour le moment.
+          </div>
+        ) : (
+          items.map((item) => (
+            <article key={item.id} className="rounded-2xl border border-slate-200 bg-white p-4">
+              <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{formatDate(item.submittedAt)}</p>
+              <h3 className="mt-1 text-base font-black text-slate-900">{item.fullName}</h3>
+              <div className="mt-3 space-y-1 text-sm text-slate-700">
+                <p><span className="font-semibold">Email:</span> {item.email}</p>
+                <p><span className="font-semibold">Téléphone:</span> {item.phone}</p>
+                <p><span className="font-semibold">Service:</span> {item.serviceLabel}</p>
+                <p><span className="font-semibold">Langue:</span> {item.locale.toUpperCase()}</p>
+              </div>
+              <div className="mt-3 rounded-xl bg-slate-50 p-3">
+                <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Message</p>
+                <p className="mt-1 whitespace-pre-wrap text-sm text-slate-700">{item.message}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => removeOne(item.id)}
+                disabled={saving}
+                className="mt-4 w-full rounded-xl bg-red-50 px-3 py-2 text-sm font-bold text-red-700 hover:bg-red-100 disabled:opacity-50"
+              >
+                Supprimer
+              </button>
+            </article>
+          ))
+        )}
+      </div>
+
+      <div className="hidden overflow-x-auto rounded-2xl border border-slate-200 md:block">
         <table className="min-w-full divide-y divide-slate-200 text-sm">
           <thead className="bg-slate-100 text-left text-xs uppercase tracking-wide text-slate-600">
             <tr>
