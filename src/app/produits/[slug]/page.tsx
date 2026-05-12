@@ -1,21 +1,29 @@
 import type { Metadata } from 'next';
+import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import { ProductDetailPage } from '../../../views/ProductDetail';
-import { PRODUCT_FAMILIES } from '../../../constants';
 import { SITE_NAME, SITE_URL } from '../../../lib/site';
+import { getContent } from '../../../lib/content/store';
+import type { ProductFamily } from '../../../types';
 
 type Params = { slug: string };
 type PageProps = { params: Promise<Params> };
 
-const getProductBySlug = (slug: string) => PRODUCT_FAMILIES.find((family) => family.slug === slug);
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
-export function generateStaticParams() {
-  return PRODUCT_FAMILIES.map((family) => ({ slug: family.slug }));
-}
+const normalizeProducts = (products: ProductFamily[]): ProductFamily[] =>
+  products.map((product) => ({
+    ...product,
+    images: product.images.map((image) => encodeURI(image)),
+  }));
+
+const getProducts = cache(async (): Promise<ProductFamily[]> => normalizeProducts(await getContent('products')));
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const products = await getProducts();
+  const product = products.find((family) => family.slug === slug);
 
   if (!product) {
     return {
@@ -47,7 +55,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const products = await getProducts();
+  const product = products.find((family) => family.slug === slug);
 
   if (!product) {
     notFound();
@@ -107,7 +116,7 @@ export default async function Page({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([productJsonLd, breadcrumbJsonLd]) }}
       />
-      <ProductDetailPage />
+      <ProductDetailPage product={product} products={products} />
     </>
   );
 }

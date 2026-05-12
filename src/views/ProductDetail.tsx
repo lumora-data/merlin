@@ -9,16 +9,24 @@ import { ArrowLeft, CheckCircle2, ShieldCheck, Truck, ShoppingCart } from 'lucid
 import type { Locale } from '../lib/i18n';
 import { ROUTES } from '../lib/i18n';
 import { localizeProductFamilies, localizeProductFamily } from '../lib/localized-content';
+import type { ProductFamily } from '../types';
 
-export const ProductDetailPage = ({ locale = 'fr' }: { locale?: Locale }) => {
+type ProductDetailPageProps = {
+  locale?: Locale;
+  product?: ProductFamily;
+  products?: ProductFamily[];
+};
+
+export const ProductDetailPage = ({ locale = 'fr', product: initialProduct, products: initialProducts }: ProductDetailPageProps) => {
   const params = useParams<{ slug: string | string[] }>();
   const router = useRouter();
   const isEn = locale === 'en';
   const routes = ROUTES[locale];
+  const baseProducts = initialProducts ?? PRODUCT_FAMILIES;
   const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
-  const rawProduct = PRODUCT_FAMILIES.find((p) => p.slug === slug);
+  const rawProduct = initialProduct ?? baseProducts.find((p) => p.slug === slug);
   const product = rawProduct ? localizeProductFamily(rawProduct, locale) : undefined;
-  const localizedProducts = localizeProductFamilies(PRODUCT_FAMILIES, locale);
+  const localizedProducts = localizeProductFamilies(baseProducts, locale);
 
   const [activeImage, setActiveImage] = React.useState(0);
 

@@ -1,10 +1,14 @@
 import type { MetadataRoute } from 'next';
-import { PRODUCT_FAMILIES } from '../constants';
 import { SITE_URL, STATIC_ROUTES } from '../lib/site';
 import { ROUTES } from '../lib/i18n';
+import { getContent } from '../lib/content/store';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const products = await getContent('products');
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
     url: `${SITE_URL}${route}`,
@@ -13,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '/' ? 1 : 0.8,
   }));
 
-  const productEntries: MetadataRoute.Sitemap = PRODUCT_FAMILIES.map((family) => ({
+  const productEntries: MetadataRoute.Sitemap = products.map((family) => ({
     url: `${SITE_URL}/produits/${family.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
@@ -28,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === '/en' ? 0.95 : 0.75,
   }));
 
-  const englishProductEntries: MetadataRoute.Sitemap = PRODUCT_FAMILIES.map((family) => ({
+  const englishProductEntries: MetadataRoute.Sitemap = products.map((family) => ({
     url: `${SITE_URL}/en/products/${family.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',

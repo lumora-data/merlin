@@ -3,6 +3,7 @@
 import React from 'react';
 import type { ProductFamily } from '../../types';
 import { UploadImageField } from './UploadImageField';
+import { toSlug } from '../../lib/slug';
 
 const newProduct = (): ProductFamily => ({
   id: crypto.randomUUID?.() ?? `${Date.now()}`,
@@ -84,17 +85,20 @@ export const ProductsEditor = () => {
   };
 
   const save = async () => {
-    if (!form.slug.trim() || !form.title.trim() || !form.description.trim() || form.images.length === 0) {
+    const normalizedSlug = toSlug(form.slug.trim() || form.title.trim());
+    if (!normalizedSlug || !form.title.trim() || !form.description.trim() || form.images.length === 0) {
       setError('Slug, titre, description et au moins une image sont obligatoires.');
       return;
     }
+    const payload = { ...form, slug: normalizedSlug };
+    setForm(payload);
 
     if (selectedId) {
-      await persist({ action: 'update', id: selectedId, item: form }, 'Produit mis à jour.');
+      await persist({ action: 'update', id: selectedId, item: payload }, 'Produit mis à jour.');
       return;
     }
 
-    await persist({ action: 'create', item: form }, 'Produit créé.');
+    await persist({ action: 'create', item: payload }, 'Produit créé.');
     createNew();
   };
 
@@ -177,8 +181,16 @@ export const ProductsEditor = () => {
             <input
               value={form.slug}
               onChange={(event) => setForm((prev) => ({ ...prev, slug: event.target.value }))}
+              placeholder="materiel-de-soudure"
               className="w-full rounded-xl border border-slate-200 px-4 py-2 text-sm outline-none ring-emerald-500 focus:ring-2"
             />
+            <button
+              type="button"
+              onClick={() => setForm((prev) => ({ ...prev, slug: toSlug(prev.title) }))}
+              className="mt-2 text-xs font-bold text-emerald-700 underline underline-offset-2"
+            >
+              Générer le slug depuis le titre
+            </button>
           </div>
         </div>
 

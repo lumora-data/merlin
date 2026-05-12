@@ -1,5 +1,6 @@
 import type { ContentMap, HeroSlide, QuoteRequest } from './types';
 import type { Agency, ProductFamily, Service, ServiceIcon } from '../../types';
+import { isValidProductSlug, toSlug } from '../slug';
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -92,10 +93,12 @@ export const validateProducts = (input: unknown): ProductFamily[] => {
     assert(isNonEmptyString(typed.title), `Product ${index + 1}: title is required`);
     assert(isNonEmptyString(typed.description), `Product ${index + 1}: description is required`);
     assert(isStringArray(typed.images), `Product ${index + 1}: images must be a list of URLs`);
+    const slug = toSlug(typed.slug.trim());
+    assert(isValidProductSlug(slug), `Product ${index + 1}: invalid slug format`);
 
     return {
       id: typed.id.trim(),
-      slug: typed.slug.trim(),
+      slug,
       title: typed.title.trim(),
       description: typed.description.trim(),
       images: typed.images.map((image) => image.trim()),

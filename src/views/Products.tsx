@@ -8,11 +8,17 @@ import { ArrowRight, ShoppingCart } from 'lucide-react';
 import type { Locale } from '../lib/i18n';
 import { ROUTES } from '../lib/i18n';
 import { localizeProductFamilies } from '../lib/localized-content';
+import type { ProductFamily } from '../types';
 
-export const ProductsPage = ({ locale = 'fr' }: { locale?: Locale }) => {
+type ProductsPageProps = {
+  locale?: Locale;
+  products?: ProductFamily[];
+};
+
+export const ProductsPage = ({ locale = 'fr', products = PRODUCT_FAMILIES }: ProductsPageProps) => {
   const isEn = locale === 'en';
   const routes = ROUTES[locale];
-  const productFamilies = localizeProductFamilies(PRODUCT_FAMILIES, locale);
+  const productFamilies = localizeProductFamilies(products, locale);
 
   return (
     <div className="bg-merlin-gray min-h-screen pb-24">
