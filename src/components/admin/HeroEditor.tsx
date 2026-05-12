@@ -73,7 +73,7 @@ export const HeroEditor = () => {
       return;
     }
 
-    const next = [...slides, { ...form, image: form.image.trim(), alt: form.alt.trim() }];
+    const next = [{ ...form, image: form.image.trim(), alt: form.alt.trim() }, ...slides];
     await saveSlides(next, 'Image ajoutée au hero slider.');
     setForm(initialForm());
   };
