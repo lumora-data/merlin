@@ -159,7 +159,7 @@
   },
   {
     "id": "9e6df4ee-5a80-4089-81f9-22d8d6c5039e",
-    "slug": "Matériel-piscine, éléments de filtration, pièces à sceller...",
+    "slug": "materiel-piscine-elements-de-filtration-pieces-a-sceller",
     "title": "Équipements de piscine",
     "description": "Pour tous vos besoins d'installation de piscine, MERLIN CAMEROUN SARL vous fournit le matériel nécessaire",
     "images": [
@@ -172,6 +172,17 @@
       "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778336721/merlin-cms/baz0dkrkwhvllynuf6v3.jpg",
       "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778336759/merlin-cms/y5mfclsgagnx9k9vfe3s.jpg",
       "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778336780/merlin-cms/novp62fc4zck2m4blqcm.jpg"
+    ]
+  },
+  {
+    "id": "1d3c0af2-9d05-48d8-af0a-738a74a81a40",
+    "slug": "chaises-en-matiere-plastique",
+    "title": "Chaises en matière plastique",
+    "description": "Découvrez nos chaises en matière plastique, conçues pour allier confort, résistance et praticité. Adaptées aussi bien à un usage intérieur qu’extérieur, elles offrent une excellente durabilité face à l’humidité et aux usages quotidiens.Disponibles en plusieurs coloris et modèles selon vos besoins.",
+    "images": [
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778581919/merlin-cms/ermrhmgtdwuztm2zvvsj.jpg",
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778582099/merlin-cms/xn635sokclzqp96ies8v.jpg",
+      "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778582186/merlin-cms/bnvui3cmczgyulrnabyb.jpg"
     ]
   }
 ]
