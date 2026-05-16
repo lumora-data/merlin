@@ -9,8 +9,16 @@ const newProduct = (): ProductFamily => ({
   id: crypto.randomUUID?.() ?? `${Date.now()}`,
   slug: '',
   title: '',
+  titleEn: '',
   description: '',
+  descriptionEn: '',
   images: [],
+});
+
+const normalizeFormProduct = (item: ProductFamily): ProductFamily => ({
+  ...item,
+  titleEn: item.titleEn ?? '',
+  descriptionEn: item.descriptionEn ?? '',
 });
 
 export const ProductsEditor = () => {
@@ -33,7 +41,8 @@ export const ProductsEditor = () => {
         setError(payload.error ?? 'Impossible de charger les produits.');
         return;
       }
-      setItems(payload.items);
+      const normalizedItems = payload.items.map(normalizeFormProduct);
+      setItems(normalizedItems);
     } catch {
       setError('Erreur réseau au chargement.');
     } finally {
@@ -61,7 +70,8 @@ export const ProductsEditor = () => {
         setError(payload.error ?? 'Erreur de sauvegarde.');
         return;
       }
-      setItems(payload.items);
+      const normalizedItems = payload.items.map(normalizeFormProduct);
+      setItems(normalizedItems);
       setSuccess(okMessage);
     } catch {
       setError('Erreur réseau pendant la sauvegarde.');
@@ -74,7 +84,7 @@ export const ProductsEditor = () => {
     const item = items.find((entry) => entry.id === id);
     if (!item) return;
     setSelectedId(id);
-    setForm(item);
+    setForm(normalizeFormProduct(item));
     setImageInput('');
   };
 
@@ -90,7 +100,17 @@ export const ProductsEditor = () => {
       setError('Slug, titre, description et au moins une image sont obligatoires.');
       return;
     }
-    const payload = { ...form, slug: normalizedSlug };
+    if (!selectedId && (!form.titleEn?.trim() || !form.descriptionEn?.trim())) {
+      setError('Pour un nouveau produit, ajoutez aussi le titre EN et la description EN.');
+      return;
+    }
+
+    const payload: ProductFamily = {
+      ...form,
+      slug: normalizedSlug,
+      titleEn: form.titleEn?.trim() || undefined,
+      descriptionEn: form.descriptionEn?.trim() || undefined,
+    };
     setForm(payload);
 
     if (selectedId) {
@@ -194,12 +214,44 @@ export const ProductsEditor = () => {
           </div>
         </div>
 
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="mb-1 block text-sm font-bold text-slate-700">Titre (EN)</label>
+            <input
+              value={form.titleEn ?? ''}
+              onChange={(event) => setForm((prev) => ({ ...prev, titleEn: event.target.value }))}
+              placeholder="Welding Equipment"
+              className="w-full rounded-xl border border-slate-200 px-4 py-2 text-sm outline-none ring-emerald-500 focus:ring-2"
+            />
+          </div>
+          <div className="flex items-end">
+            <button
+              type="button"
+              onClick={() => setForm((prev) => ({ ...prev, titleEn: prev.title }))}
+              className="w-full rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto"
+            >
+              Copier le titre FR
+            </button>
+          </div>
+        </div>
+
         <div>
           <label className="mb-1 block text-sm font-bold text-slate-700">Description</label>
           <textarea
             value={form.description}
             onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))}
             rows={4}
+            className="w-full rounded-xl border border-slate-200 px-4 py-2 text-sm outline-none ring-emerald-500 focus:ring-2"
+          />
+        </div>
+
+        <div>
+          <label className="mb-1 block text-sm font-bold text-slate-700">Description (EN)</label>
+          <textarea
+            value={form.descriptionEn ?? ''}
+            onChange={(event) => setForm((prev) => ({ ...prev, descriptionEn: event.target.value }))}
+            rows={4}
+            placeholder="Describe this product family in English."
             className="w-full rounded-xl border border-slate-200 px-4 py-2 text-sm outline-none ring-emerald-500 focus:ring-2"
           />
         </div>

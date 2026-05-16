@@ -7,6 +7,11 @@ function assert(condition: unknown, message: string): asserts condition {
 }
 
 const isNonEmptyString = (value: unknown) => typeof value === 'string' && value.trim().length > 0;
+const toOptionalTrimmedString = (value: unknown): string | undefined => {
+  if (typeof value !== 'string') return undefined;
+  const normalized = value.trim();
+  return normalized.length > 0 ? normalized : undefined;
+};
 
 const isStringArray = (value: unknown) => Array.isArray(value) && value.every((item) => isNonEmptyString(item));
 
@@ -100,7 +105,9 @@ export const validateProducts = (input: unknown): ProductFamily[] => {
       id: typed.id.trim(),
       slug,
       title: typed.title.trim(),
+      titleEn: toOptionalTrimmedString((item as { titleEn?: unknown }).titleEn),
       description: typed.description.trim(),
+      descriptionEn: toOptionalTrimmedString((item as { descriptionEn?: unknown }).descriptionEn),
       images: typed.images.map((image) => image.trim()),
     };
   });

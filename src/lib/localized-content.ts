@@ -115,6 +115,16 @@ const AGENCY_ADDRESS_EN: Record<string, string> = {
 
 export const localizeProductFamily = (family: ProductFamily, locale: Locale): ProductFamily => {
   if (locale !== 'en') return family;
+  const englishTitle = family.titleEn?.trim();
+  const englishDescription = family.descriptionEn?.trim();
+  if (englishTitle || englishDescription) {
+    return {
+      ...family,
+      title: englishTitle || family.title,
+      description: englishDescription || family.description,
+    };
+  }
+
   const translated = PRODUCT_EN[family.slug];
   if (!translated) return family;
   return {
