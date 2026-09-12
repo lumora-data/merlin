@@ -124,19 +124,19 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-y-8 lg:gap-x-10 lg:items-start">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="space-y-10"
+              className="space-y-6"
             >
-              <div className="space-y-5">
+              <div className="space-y-3">
                 <img
                   src={encodeURI('/images/accueil/merlin-academy/merlin-academy-logo.jpg')}
                   alt="Merlin Academy"
-                  className="w-44 sm:w-56 md:w-64 h-auto object-contain mx-auto lg:mx-0 drop-shadow-xl"
+                  className="w-28 sm:w-32 md:w-36 lg:w-[160px] h-auto object-contain mx-auto lg:mx-0 drop-shadow-md"
                 />
                 <span className="inline-flex items-center gap-3 text-merlin-green font-black text-xs uppercase tracking-[0.3em]">
                   <GraduationCap className="w-5 h-5" />
@@ -151,35 +151,6 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
                     : 'Des formations professionnelles pour les équipes et entrepreneurs dans les matériaux de construction, la logistique, le transport et le négoce.'}
                 </p>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  {
-                    icon: Settings,
-                    title: isEn ? 'Construction materials' : 'Matériaux de construction',
-                  },
-                  {
-                    icon: Truck,
-                    title: isEn ? 'Logistics & transport' : 'Logistique et transport',
-                  },
-                  {
-                    icon: BarChart3,
-                    title: isEn ? 'Trading' : 'Négoce',
-                  },
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.08 }}
-                    viewport={{ once: true }}
-                    className="border-l-4 border-merlin-red bg-merlin-gray/70 px-5 py-5"
-                  >
-                    <item.icon className="w-7 h-7 text-merlin-green mb-4" />
-                    <p className="text-sm font-black uppercase leading-tight text-merlin-black">{item.title}</p>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
 
             <motion.div
@@ -187,7 +158,7 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="relative aspect-video overflow-hidden rounded-[2rem] shadow-2xl border-4 border-merlin-gray bg-merlin-black sm:rounded-[2.5rem]"
+              className="relative aspect-video w-full overflow-hidden rounded-[2rem] border-4 border-merlin-gray bg-merlin-black shadow-[0_24px_70px_rgba(17,24,39,0.16)] sm:rounded-[2.5rem] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-20"
             >
               <video
                 src={encodeURI('/images/accueil/merlin-academy/merlin-academy.mp4')}
@@ -198,6 +169,35 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
                 aria-label={isEn ? 'Merlin Academy presentation video' : 'Vidéo de présentation Merlin Academy'}
               />
             </motion.div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:col-start-1 lg:row-start-2">
+              {[
+                {
+                  icon: Settings,
+                  title: isEn ? 'Construction materials' : 'Matériaux de construction',
+                },
+                {
+                  icon: Truck,
+                  title: isEn ? 'Logistics & transport' : 'Logistique et transport',
+                },
+                {
+                  icon: BarChart3,
+                  title: isEn ? 'Trading' : 'Négoce',
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.08 }}
+                  viewport={{ once: true }}
+                  className="border-l-4 border-merlin-red bg-merlin-gray/70 px-5 py-5"
+                >
+                  <item.icon className="w-7 h-7 text-merlin-green mb-4" />
+                  <p className="text-sm font-black uppercase leading-tight text-merlin-black">{item.title}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
