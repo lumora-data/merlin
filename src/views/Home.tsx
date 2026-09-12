@@ -182,30 +182,16 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="grid grid-cols-1 gap-5 sm:grid-cols-[minmax(0,1fr)_minmax(210px,280px)] lg:items-center"
+              className="relative aspect-video overflow-hidden rounded-[2rem] shadow-2xl border-4 border-merlin-gray bg-merlin-black sm:rounded-[2.5rem]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-2xl border-4 border-merlin-gray bg-white sm:rounded-[2.5rem]">
-                <img
-                  src={encodeURI('/images/accueil/merlin-academics/merlin-academics.jpg')}
-                  alt={isEn ? 'Merlin Academics training session' : 'Session de formation Merlin Academics'}
-                  className="w-full h-full object-contain"
-                />
-                <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-merlin-black/75 to-transparent">
-                  <p className="text-white text-xl sm:text-2xl font-black uppercase leading-tight">{isEn ? 'Practical learning' : 'Apprentissage pratique'}</p>
-                </div>
-              </div>
-
-              <div className="relative mx-auto aspect-[9/16] w-full max-w-[320px] overflow-hidden rounded-[2rem] shadow-2xl border-4 border-merlin-gray bg-merlin-black sm:max-w-none sm:rounded-[2.5rem]">
-                <video
-                  src={encodeURI('/images/accueil/merlin-academics/merlin-academics.mp4')}
-                  className="w-full h-full object-contain bg-merlin-black"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={encodeURI('/images/accueil/merlin-academics/merlin-academics.jpg')}
-                  aria-label={isEn ? 'Merlin Academics presentation video' : 'Vidéo de présentation Merlin Academics'}
-                />
-              </div>
+              <video
+                src={encodeURI('/images/accueil/merlin-academics/merlin-academics.mp4')}
+                className="w-full h-full object-cover bg-merlin-black"
+                controls
+                playsInline
+                preload="metadata"
+                aria-label={isEn ? 'Merlin Academics presentation video' : 'Vidéo de présentation Merlin Academics'}
+              />
             </motion.div>
           </div>
         </div>
