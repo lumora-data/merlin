@@ -109,13 +109,13 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
         </div>
       </section>
 
-      {/* Merlin Academics Section */}
+      {/* Merlin Academy Section */}
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="w-full bg-merlin-red text-white py-4 mb-16 shadow-lg border-b-4 border-merlin-black/10 relative z-10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="w-1 h-8 bg-white/30 hidden md:block" />
-              <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">MERLIN ACADEMICS</h2>
+              <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">MERLIN ACADEMY</h2>
             </div>
             <Link href={routes.contact} className="flex items-center gap-2 group font-black text-white hover:bg-white hover:text-merlin-red transition-all uppercase tracking-[0.2em] text-[10px] px-6 py-2 rounded-full border border-white/30">
               {isEn ? 'Join a training' : 'Suivre une formation'} <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
@@ -133,12 +133,17 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
               className="space-y-10"
             >
               <div className="space-y-5">
+                <img
+                  src={encodeURI('/images/accueil/merlin-academy/merlin-academy-logo.jpg')}
+                  alt="Merlin Academy"
+                  className="w-44 sm:w-56 md:w-64 h-auto object-contain mx-auto lg:mx-0 drop-shadow-xl"
+                />
                 <span className="inline-flex items-center gap-3 text-merlin-green font-black text-xs uppercase tracking-[0.3em]">
                   <GraduationCap className="w-5 h-5" />
                   {isEn ? 'Training branch' : 'Branche formation'}
                 </span>
                 <h3 className="text-4xl sm:text-5xl md:text-7xl font-black font-outfit uppercase leading-[0.9] text-merlin-black">
-                  Merlin <span className="text-merlin-red">Academics</span>
+                  Merlin <span className="text-merlin-red">Academy</span>
                 </h3>
                 <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl font-medium">
                   {isEn
@@ -185,12 +190,12 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
               className="relative aspect-video overflow-hidden rounded-[2rem] shadow-2xl border-4 border-merlin-gray bg-merlin-black sm:rounded-[2.5rem]"
             >
               <video
-                src={encodeURI('/images/accueil/merlin-academics/merlin-academics.mp4')}
+                src={encodeURI('/images/accueil/merlin-academy/merlin-academy.mp4')}
                 className="w-full h-full object-cover bg-merlin-black"
                 controls
                 playsInline
                 preload="metadata"
-                aria-label={isEn ? 'Merlin Academics presentation video' : 'Vidéo de présentation Merlin Academics'}
+                aria-label={isEn ? 'Merlin Academy presentation video' : 'Vidéo de présentation Merlin Academy'}
               />
             </motion.div>
           </div>
