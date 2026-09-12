@@ -3,7 +3,7 @@
 import React from 'react';
 import { HeroSlider } from '../components/HeroSlider';
 import { SERVICES, AGENCIES, PRODUCT_FAMILIES } from '../constants';
-import { Settings, Truck, ShoppingBag, BarChart3, Clock, CheckCircle, Shield, MapPin, ArrowRight } from 'lucide-react';
+import { Settings, Truck, ShoppingBag, BarChart3, Clock, CheckCircle, Shield, MapPin, ArrowRight, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import type { Locale } from '../lib/i18n';
@@ -105,6 +105,108 @@ export const Home = ({ locale = 'fr' }: { locale?: Locale }) => {
                 <Link href={`${routes.products}/${family.slug}`} className="absolute inset-0 z-10" />
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Merlin Academics Section */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="w-full bg-merlin-red text-white py-4 mb-16 shadow-lg border-b-4 border-merlin-black/10 relative z-10">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-1 h-8 bg-white/30 hidden md:block" />
+              <h2 className="text-xl md:text-3xl font-black font-outfit uppercase tracking-tighter">MERLIN ACADEMICS</h2>
+            </div>
+            <Link href={routes.contact} className="flex items-center gap-2 group font-black text-white hover:bg-white hover:text-merlin-red transition-all uppercase tracking-[0.2em] text-[10px] px-6 py-2 rounded-full border border-white/30">
+              {isEn ? 'Join a training' : 'Suivre une formation'} <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="space-y-10"
+            >
+              <div className="space-y-5">
+                <span className="inline-flex items-center gap-3 text-merlin-green font-black text-xs uppercase tracking-[0.3em]">
+                  <GraduationCap className="w-5 h-5" />
+                  {isEn ? 'Training branch' : 'Branche formation'}
+                </span>
+                <h3 className="text-4xl sm:text-5xl md:text-7xl font-black font-outfit uppercase leading-[0.9] text-merlin-black">
+                  Merlin <span className="text-merlin-red">Academics</span>
+                </h3>
+                <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl font-medium">
+                  {isEn
+                    ? 'Professional training for teams and entrepreneurs in construction materials, logistics, transport and trading.'
+                    : 'Des formations professionnelles pour les équipes et entrepreneurs dans les matériaux de construction, la logistique, le transport et le négoce.'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  {
+                    icon: Settings,
+                    title: isEn ? 'Construction materials' : 'Matériaux de construction',
+                  },
+                  {
+                    icon: Truck,
+                    title: isEn ? 'Logistics & transport' : 'Logistique et transport',
+                  },
+                  {
+                    icon: BarChart3,
+                    title: isEn ? 'Trading' : 'Négoce',
+                  },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    viewport={{ once: true }}
+                    className="border-l-4 border-merlin-red bg-merlin-gray/70 px-5 py-5"
+                  >
+                    <item.icon className="w-7 h-7 text-merlin-green mb-4" />
+                    <p className="text-sm font-black uppercase leading-tight text-merlin-black">{item.title}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            >
+              <div className="relative h-[420px] sm:h-[520px] overflow-hidden rounded-[3rem] shadow-2xl border-4 border-merlin-gray">
+                <img
+                  src={encodeURI('/images/accueil/merlin-academics/merlin-academics.jpg')}
+                  alt={isEn ? 'Merlin Academics training session' : 'Session de formation Merlin Academics'}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-merlin-black/80 to-transparent">
+                  <p className="text-white text-2xl font-black uppercase leading-tight">{isEn ? 'Practical learning' : 'Apprentissage pratique'}</p>
+                </div>
+              </div>
+
+              <div className="relative h-[420px] sm:h-[520px] overflow-hidden rounded-[3rem] shadow-2xl border-4 border-merlin-gray bg-merlin-black">
+                <video
+                  src={encodeURI('/images/accueil/merlin-academics/merlin-academics.mp4')}
+                  className="w-full h-full object-cover"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={encodeURI('/images/accueil/merlin-academics/merlin-academics.jpg')}
+                  aria-label={isEn ? 'Merlin Academics presentation video' : 'Vidéo de présentation Merlin Academics'}
+                />
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
