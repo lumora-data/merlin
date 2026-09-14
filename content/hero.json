@@ -58,5 +58,20 @@
     "id": "2f9a978f-2525-422f-94d2-6c2696a5436d",
     "image": "https://res.cloudinary.com/dhzqadlwc/image/upload/v1778348134/merlin-cms/h5qxvvzpqqv6zbtnxobx.jpg",
     "alt": "Hero Merlin 12"
+  },
+  {
+    "id": "hero-2026-09-11-11-23-08",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-09-11-11-23-08.jpg",
+    "alt": "Hero Merlin 13"
+  },
+  {
+    "id": "hero-2026-09-12-11-32-39",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-09-12-11-32-39.jpg",
+    "alt": "Hero Merlin 14"
+  },
+  {
+    "id": "hero-2026-09-11-11-23-07",
+    "image": "/images/accueil/hero-caroussel/PHOTO-2026-09-11-11-23-07.jpg",
+    "alt": "Hero Merlin 15"
   }
 ]
