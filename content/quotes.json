@@ -1,5 +1,16 @@
 [
   {
+    "id": "d654baab-3b4f-4d97-9756-5c9aca0933f7",
+    "submittedAt": "2026-11-02T09:29:49.104Z",
+    "fullName": "Javier Lobede B.",
+    "email": "javierlobede@alduco.com",
+    "phone": "+240 222 246302",
+    "service": "other",
+    "serviceLabel": "Other",
+    "message": "Good Mornig\nWe need to buy welding materials",
+    "locale": "en"
+  },
+  {
     "id": "b7b5316f-a0dd-4ad2-a9eb-358b23cc7e84",
     "submittedAt": "2026-09-28T07:16:17.206Z",
     "fullName": "SoftX Team",
